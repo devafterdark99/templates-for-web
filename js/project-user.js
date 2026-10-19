@@ -83,7 +83,7 @@
     classified: {
       label: "RESTRICTED FILE / 006",
       title: "REDACTED INTEL.",
-      text: "Some information is being withheld until the final birthday experience is ready. Replace this placeholder with an inside joke, a secret note or a final reveal that only Atharva will understand.",
+      text: "Some information is being withheld until the final birthday experience is ready. Replace this placeholder with an inside joke, a secret note or a final reveal that only User will understand.",
       status: "STATUS: CLASSIFIED BY THE INVESTIGATOR"
     }
   };
@@ -113,7 +113,7 @@
     }
 
     // Demo only: there is no secret authentication or real security here.
-    if (["atharva", "birthday", "10 december", "10-dec", "roommate"].includes(code)) {
+    if (["user", "birthday", "10 december", "10-dec", "roommate"].includes(code)) {
       result.style.color = "var(--green)";
       result.textContent = "> ACCESS GRANTED. DEMO TERMINAL UNLOCKED ✓";
       toast("DEMO ACCESS GRANTED // NICE TRY, INVESTIGATOR");
@@ -148,7 +148,7 @@
   const updateClock = () => {
     const now = new Date();
     const date = now.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }).toUpperCase();
-    document.title = "PROJECT ATHARVA // CLASSIFIED";
+    document.title = "PROJECT USER // CLASSIFIED";
     const foot = document.querySelector(".visual-bottom span");
     if (foot) foot.textContent = "LOCAL SYSTEM // " + date;
   };

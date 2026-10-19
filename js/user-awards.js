@@ -6,37 +6,37 @@
         {
           title: "Human Plot Twist",
           reason: "For making absolutely no sense and somehow being the most entertaining person in the room.",
-          winner: "Atharva",
+          winner: "User",
           tag: "PURE CHAOS"
         },
         {
           title: "Attendance Survivor",
           reason: "For surviving deadlines, lectures, submissions and the mysterious academic calendar.",
-          winner: "Atharva",
+          winner: "User",
           tag: "COLLEGE LIFE"
         },
         {
           title: "Drama Department CEO",
           reason: "For delivering award-winning reactions to situations that absolutely did not need them.",
-          winner: "Atharva",
+          winner: "User",
           tag: "PURE CHAOS"
         },
         {
           title: "Professional Timepass",
           reason: "For turning a five-minute break into an entire side quest with absolutely no regrets.",
-          winner: "Atharva",
+          winner: "User",
           tag: "COLLEGE LIFE"
         },
         {
           title: "Certified Day-One Energy",
           reason: "For being part of the memories, random conversations and little moments that matter.",
-          winner: "Atharva",
+          winner: "User",
           tag: "WHOLESOME"
         },
         {
           title: "Certified Absolute Legend",
           reason: "For being unapologetically yourself. No competition. No runner-up. Just the legend.",
-          winner: "Atharva",
+          winner: "User",
           tag: "WHOLESOME"
         }
       ];
@@ -204,7 +204,7 @@
 
       document.getElementById("shareAward").addEventListener("click", async () => {
         const result =
-          "🏆 THE ATHARVA AWARDS 🏆\n" +
+          "🏆 THE USER AWARDS 🏆\n" +
           "Award: " + dialog.dataset.title + "\n" +
           "Winner: " + dialog.dataset.winner + "\n" +
           dialog.dataset.reason + "\n\n" +
@@ -331,7 +331,7 @@
         document.getElementById("emptyState").classList.remove("show");
 
         event.target.reset();
-        winnerInput.value = "Atharva";
+        winnerInput.value = "User";
 
         card.scrollIntoView({ behavior: "smooth", block: "center" });
         showToast("Bonus award added to the official ceremony! 🏆");
@@ -343,7 +343,7 @@
         playTone(660, 0.2);
         setTimeout(() => playTone(880, 0.2), 170);
         setTimeout(() => playTone(1100, 0.35), 340);
-        showToast("Happy Birthday, Atharva! Certified legend status: PERMANENT. ✦");
+        showToast("Happy Birthday, User! Certified legend status: PERMANENT. ✦");
       });
 
       document.getElementById("soundToggle").addEventListener("click", () => {

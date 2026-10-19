@@ -36,6 +36,6 @@ Open `index.html` in a browser, or use VS Code with the Live Server extension.
 
 ## Important note about choices
 
-The current selection is stored in the visitor's browser using `localStorage`. It does not send the selection to the project owner. To collect Atharva's choice remotely, connect a form service or backend before sharing the selector.
+The current selection is stored in the visitor's browser using `localStorage`. It does not send the selection to the project owner. To collect User's choice remotely, connect a form service or backend before sharing the selector.
 
 Google Fonts are loaded from Google Fonts; if offline, the browser uses the fallback fonts.

@@ -10,10 +10,10 @@
 
   const pages = {
     home: {
-      url: "https://atharva.is.a.legend/",
+      url: "https://user.is.a.legend/",
       status: "DONE — 4 suspicious links detected.",
       label: "PERSONAL HOMEPAGE / 001",
-      title: "THE ONE.<br>THE ONLY.<br><span>ATHARVA!</span>",
+      title: "THE ONE.<br>THE ONLY.<br><span>USER!</span>",
       description: "Loading legendary content since first semester...",
       emoji: ["★", "✦", "♥"],
       links: [
@@ -24,16 +24,16 @@
       ]
     },
     about: {
-      url: "https://atharva.wiki/about",
+      url: "https://user.wiki/about",
       status: "PAGE LOADED — LEGENDARY STATUS VERIFIED.",
-      label: "WIKI / ATHARVA PROFILE",
+      label: "WIKI / USER PROFILE",
       title: "THE LEGEND<br><span>WIKI.</span>",
       description: "Species: college legend. Natural habitat: campus and hostel. Special ability: making ordinary moments memorable. Weakness: birthday surprises.",
       emoji: ["🧠", "★", "☕"],
       links: [["[ VIEW AWARDS ]", "awards"], ["[ BACK HOME ]", "home"]]
     },
     awards: {
-      url: "https://hall.of.fame/atharva",
+      url: "https://hall.of.fame/user",
       status: "AWARDS ARCHIVE LOADED — NO JURY WAS CONSULTED.",
       label: "HALL OF FAME / TROPHIES",
       title: "THE GREAT<br><span>AWARDS.</span>",
@@ -42,7 +42,7 @@
       links: [["[ VIEW PROFILE ]", "about"], ["[ SECRET FILE ]", "secret"]]
     },
     memes: {
-      url: "https://memes.archive/atharva",
+      url: "https://memes.archive/user",
       status: "MEME ARCHIVE OPEN — BRAIN CELLS MAY BE AT RISK.",
       label: "MEME DATABASE / RESTRICTED",
       title: "MEME<br><span>ARCHIVE.</span>",
@@ -64,7 +64,7 @@
       status: "ERROR 404 — TOO MUCH LEGEND, NOT ENOUGH SERVER.",
       label: "ERROR / 404",
       title: "OOPS.<br><span>IT BROKE.</span>",
-      description: "The requested page has been temporarily relocated to another dimension. Possible cause: Atharva exceeded the maximum permitted legend level. Suggested fix: return to the homepage.",
+      description: "The requested page has been temporarily relocated to another dimension. Possible cause: User exceeded the maximum permitted legend level. Suggested fix: return to the homepage.",
       emoji: ["💥", "⚠", "🛠"],
       links: [["[ TRY AGAIN ]", "error"], ["[ ESCAPE TO HOME ]", "home"]]
     }
@@ -165,9 +165,9 @@
 
   const dialogContent = {
     about: {
-      label: "WIKI / ATHARVA PROFILE",
+      label: "WIKI / USER PROFILE",
       title: "THE LEGEND WIKI.",
-      text: "This page is a playful profile placeholder. Add Atharva's real interests, funniest habits, college stories and iconic quotes to make it personal."
+      text: "This page is a playful profile placeholder. Add User's real interests, funniest habits, college stories and iconic quotes to make it personal."
     },
     awards: {
       label: "AWARDS ARCHIVE",
@@ -191,7 +191,7 @@
     },
     surprise: {
       label: "SPECIAL DELIVERY / 10 DEC",
-      title: "HAPPY BIRTHDAY, ATHARVA!",
+      title: "HAPPY BIRTHDAY, USER!",
       text: "This is the preview of the final birthday surprise. Replace this message with your own wishes, shared memories and the reveal for your physical gift."
     }
   };

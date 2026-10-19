@@ -70,7 +70,7 @@
         "If you've made it this far, you've officially completed the Friendship Quest.\n\n" +
         "The best part of this adventure was never the XP, the badges or the treasure chest. It was all the ridiculous little moments that turned into stories worth keeping.\n\n" +
         "Here's to more adventures, more nonsense, more memories and more chapters that haven't been written yet.\n\n" +
-        "HAPPY BIRTHDAY, ATHARVA! 🏆\n\n" +
+        "HAPPY BIRTHDAY, USER! 🏆\n\n" +
         "Quest status: LEGENDARY.\n" +
         "Friendship status: STILL IN PROGRESS. ♡";
 
@@ -243,7 +243,7 @@
           $("#completeQuest").textContent = "TREASURE REVEALED ✓";
           $("#completeQuest").disabled = true;
           confetti(120);
-          showToast("Legendary treasure unlocked. Happy Birthday, Atharva! 🏆");
+          showToast("Legendary treasure unlocked. Happy Birthday, User! 🏆");
           return;
         }
 
