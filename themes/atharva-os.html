@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d18">
+<meta name="description" content="ATHARVA.EXE — Atharva's personal birthday operating system.">
+<title>ATHARVA.EXE — Personal Desktop</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#080d18;
+  --panel:rgba(15,23,40,.92);
+  --line:rgba(255,255,255,.12);
+  --muted:#96a3b9;
+  --text:#f4f7ff;
+  --cyan:#7ce9f2;
+  --violet:#a79bff;
+  --pink:#ff8acb;
+  --mono:'DM Mono',monospace;
+  --sans:'Manrope',sans-serif;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans)}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+button:disabled{opacity:.4;cursor:not-allowed}
+.desktop{height:100dvh;min-height:550px;position:relative;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 0%,#1b294b,#0b1222 48%,#070b14)}
+.wallpaper-grid{position:absolute;inset:0;z-index:-1;opacity:.13;background-image:linear-gradient(#fff2 1px,transparent 1px),linear-gradient(90deg,#fff2 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(#000,transparent 85%)}
+.glow{position:absolute;z-index:-1;width:430px;height:430px;border-radius:50%;filter:blur(3px);pointer-events:none;background:radial-gradient(circle,#676dff30,transparent 70%)}
+.glow.a{top:10%;left:15%}.glow.b{right:-8%;bottom:0;background:radial-gradient(circle,#32d6dc22,transparent 70%)}
+
+.boot{position:fixed;z-index:999;inset:0;display:grid;place-content:center;justify-items:center;background:#070b14;transition:opacity .6s,visibility .6s}
+.boot.done{opacity:0;visibility:hidden;pointer-events:none}
+.boot-logo{font-size:58px;font-weight:800;letter-spacing:-.1em}
+.boot-logo span{color:var(--cyan);font-size:24px;vertical-align:top}
+.boot h2{font:13px var(--mono);letter-spacing:.2em;margin:18px 0 7px}
+.boot p{font-size:11px;color:#7f8da8}
+.boot-track{width:200px;height:3px;background:#ffffff16;border-radius:5px;overflow:hidden;margin-top:16px}
+.boot-track span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet));animation:boot 1.7s ease forwards}
+@keyframes boot{to{width:100%}}
+
+.menubar{height:45px;position:absolute;z-index:50;inset:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:#060a14a8;border-bottom:1px solid #ffffff12;backdrop-filter:blur(22px);font-size:11px}
+.menu-left,.menu-right{display:flex;align-items:center;gap:16px}
+.menu-left strong{font-size:10px;letter-spacing:.09em}
+.menu-left button,.clock{border:0;background:none;color:#b8c5da;font-size:10px}
+.menu-logo{font-size:19px!important;color:var(--cyan)!important;padding:0}
+.menu-divider{height:15px;width:1px;background:var(--line)}
+.online{font:9px var(--mono);color:#9ee5cf}
+.online i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#66e6ad;margin-right:5px;box-shadow:0 0 10px #66e6ad}
+.clock{display:grid;text-align:right;gap:2px}
+.clock small{font:8px var(--mono);color:#8190aa}
+.clock strong{font-size:10px;color:white}
+
+.intro{position:absolute;top:17%;left:6%;max-width:470px}
+.kicker{font:9px var(--mono);letter-spacing:.13em;color:#a3b1ca}
+.live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#69e8b2;margin-right:6px}
+.intro h1{font-size:clamp(42px,5.6vw,76px);line-height:1.02;letter-spacing:-.075em;margin:17px 0 12px}
+.intro h1 span{background:linear-gradient(100deg,#fff,#90e9f3,#b5a5ff);background-clip:text;-webkit-background-clip:text;color:transparent}
+.intro p{font-size:12px;color:#9ba9c4;line-height:1.8}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:21px}
+.tags span{font:8px var(--mono);padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:#ffffff06;color:#bac6db}
+
+.desktop-icons{position:absolute;right:5%;top:9%;display:grid;grid-template-columns:repeat(2,78px);gap:17px 10px}
+.desktop-icon{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:72px;padding:8px 2px;background:none;border:1px solid transparent;border-radius:11px;color:#e5ebf7;font-size:9px;text-shadow:0 2px 7px #000}
+.desktop-icon:hover,.desktop-icon:focus-visible{background:#ffffff10;border-color:#ffffff15}
+.app-icon{width:43px;height:43px;border-radius:13px;display:grid;place-items:center;font-size:21px;color:#fff;border:1px solid #ffffff25;box-shadow:0 8px 20px #0004}
+.finder-icon{background:linear-gradient(140deg,#73d8f3,#5879d9)}
+.profile-icon{background:linear-gradient(140deg,#d8a7ff,#7763d5)}
+.chaos-icon{background:linear-gradient(140deg,#ffb45c,#ef6379)}
+.memory-icon{background:linear-gradient(140deg,#ff9dce,#9e72e9)}
+.secret-icon{background:linear-gradient(140deg,#75e4c1,#238eaa)}
+.settings-icon{background:linear-gradient(140deg,#8796b2,#3d4b67)}
+
+.widget{position:absolute;right:5%;width:265px;padding:16px;border:1px solid #ffffff18;border-radius:17px;background:linear-gradient(145deg,#1b2845d9,#0d1526e8);backdrop-filter:blur(22px);box-shadow:0 20px 55px #0003}
+.profile-widget{top:43%}
+.status-widget{top:calc(43% + 225px);padding:14px 16px}
+.widget-head{display:flex;justify-content:space-between;font:8px var(--mono);letter-spacing:.1em;color:#8d9bb5}
+.widget-head span:last-child{color:#7ee8b6}
+.profile-main{display:flex;align-items:center;gap:12px;margin:17px 0}
+.avatar{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#a6a4ff,#62d7e6);color:#12192d;display:grid;place-items:center;font-size:25px;font-weight:800;position:relative}
+.avatar span{position:absolute;right:-5px;bottom:-4px;font-size:14px;color:var(--cyan)}
+.profile-main h2{font-size:14px;margin:0 0 4px}
+.profile-main p{font-size:9px;color:#9ba9c4;margin:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0}
+.stats div{display:grid;gap:4px}
+.stats strong{font-size:16px}
+.stats small{font:7px var(--mono);color:#8796b1}
+.quote{font-size:9px;color:#aab6cb;font-style:italic;margin-top:12px}
+.status-line{display:flex;justify-content:space-between;align-items:center;margin-top:13px;font-size:9px;color:#b4bfd2}
+.status-line strong{font:8px var(--mono);color:#dce5f6}
+.status-line i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#69e8b2;margin-right:5px}
+.widget-action{width:100%;border:0;border-top:1px solid var(--line);background:none;text-align:left;color:var(--cyan);font-size:9px;padding:12px 0 0;margin-top:13px}
+.widget-action span{float:right}
+
+.desktop-note{position:absolute;left:6%;bottom:7%;display:flex;gap:11px;align-items:center;color:#a9b6cb}
+.desktop-note>span{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;color:var(--cyan)}
+.desktop-note b{display:block;font:8px var(--mono);letter-spacing:.1em}
+.desktop-note small{display:block;font-size:9px;color:#7786a1;margin-top:5px}
+
+.dock-wrap{position:absolute;z-index:60;bottom:12px;left:50%;transform:translateX(-50%);display:grid;justify-items:center;gap:7px;max-width:calc(100% - 18px)}
+.dock{display:flex;align-items:center;gap:7px;padding:9px 10px;border-radius:19px;background:#131b2ec9;border:1px solid #ffffff20;backdrop-filter:blur(25px);box-shadow:0 18px 50px #0006}
+.dock-app{position:relative;width:42px;height:42px;display:grid;place-items:center;border:1px solid #ffffff18;border-radius:12px;background:#ffffff09;transition:transform .18s,background .18s}
+.dock-app:hover{transform:translateY(-6px) scale(1.05);background:#ffffff20}
+.dock-app .app-icon{width:37px;height:37px;border-radius:10px;font-size:18px}
+.dock-app i{position:absolute;bottom:-5px;width:4px;height:4px;background:var(--cyan);border-radius:50%;opacity:0}
+.dock-app.running i{opacity:1}
+.dock-home{font-size:21px;color:var(--cyan);background:linear-gradient(135deg,#253a61,#15213c)}
+.dock-power{font-size:20px;color:#ff9db5}
+.dock-separator{width:1px;height:27px;background:#ffffff25;margin:0 2px}
+.dock-caption{font:7px var(--mono);letter-spacing:.12em;color:#71809b}
+
+.window-layer{position:absolute;z-index:30;inset:45px 0 95px;pointer-events:none}
+.app-window{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:min(650px,calc(100vw - 30px));height:min(450px,calc(100dvh - 160px));min-height:270px;background:#0d1423f5;border:1px solid #ffffff25;border-radius:15px;overflow:hidden;box-shadow:0 30px 100px #0009;backdrop-filter:blur(28px);pointer-events:auto;animation:window-in .22s ease}
+@keyframes window-in{from{opacity:0;transform:translate(-50%,-47%) scale(.97)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.app-window.maximized{left:12px!important;top:57px!important;transform:none!important;width:calc(100% - 24px)!important;height:calc(100% - 160px)!important}
+.app-window.minimized{display:none}
+.titlebar{height:44px;display:flex;align-items:center;gap:10px;padding:0 13px;background:#ffffff06;border-bottom:1px solid var(--line);cursor:grab;user-select:none}
+.titlebar:active{cursor:grabbing}
+.title-icon{width:25px;height:25px;border-radius:7px;display:grid;place-items:center;font-size:13px}
+.window-title{flex:1;font-size:10px;font-weight:800}
+.window-subtitle{font:7px var(--mono);color:#7f8da8;margin-left:8px}
+.window-controls{display:flex;gap:7px}
+.win-control{width:11px;height:11px;padding:0;border:0;border-radius:50%}
+.close-control{background:#ff6f7e}.min-control{background:#ffcb66}.max-control{background:#69dfaa}
+.window-content{height:calc(100% - 44px);overflow:auto;padding:21px}
+.window-content h2{font-size:24px;letter-spacing:-.05em;margin:7px 0 10px}
+.window-content h3{font-size:11px;margin:0 0 7px}
+.window-content p{font-size:11px;line-height:1.7;color:#a9b5cb}
+.window-kicker{font:8px var(--mono);letter-spacing:.12em;color:var(--cyan)}
+.hero-card{padding:20px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(125deg,#202b4a99,#1a354288);margin-bottom:15px}
+.mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mini-card{padding:13px;border:1px solid var(--line);border-radius:11px;background:#ffffff06}
+.mini-card>span{display:block;font-size:20px;margin-bottom:8px}
+.mini-card p{font-size:9px;margin:0}
+.file-layout{display:grid;grid-template-columns:125px 1fr;gap:15px}
+.file-sidebar{border-right:1px solid var(--line);padding-right:10px}
+.file-sidebar button{display:block;width:100%;text-align:left;padding:9px;border:0;border-radius:7px;background:transparent;color:#aebbd0;font-size:9px;margin-bottom:4px}
+.file-sidebar button.active,.file-sidebar button:hover{background:#ffffff10;color:white}
+.file-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.file-item{min-width:0;min-height:86px;padding:10px 5px;border:1px solid transparent;border-radius:9px;background:#ffffff06;color:#dbe3f3;text-align:center;font-size:8px;overflow-wrap:anywhere}
+.file-item:hover{border-color:#7ce9f255;background:#7ce9f20b}
+.file-item span{display:block;font-size:23px;margin-bottom:7px}
+.file-item small{display:block;font:7px var(--mono);color:#7f8da8;margin-top:5px}
+.memory-list{display:grid;gap:9px}
+.memory-item{display:flex;gap:11px;padding:12px;border:1px solid var(--line);border-radius:11px;background:#ffffff05}
+.memory-item>span{font-size:21px}
+.memory-item strong{font-size:10px}
+.memory-item p{font-size:9px;margin:4px 0 0}
+.setting-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.setting-row strong{font-size:10px}
+.setting-row p{font-size:9px;margin:4px 0 0}
+.switch{width:36px;height:21px;flex-shrink:0;border:0;border-radius:20px;background:#35425d;padding:3px}
+.switch span{display:block;width:15px;height:15px;border-radius:50%;background:#a7b2c9;transition:transform .2s}
+.switch.on{background:#5a9ea8}
+.switch.on span{transform:translateX(15px);background:white}
+.primary-button{border:0;border-radius:8px;padding:10px 13px;background:#d9f7fb;color:#111a2b;font-size:9px;margin-top:12px}
+.swatches{display:flex;gap:9px}
+.swatch{width:24px;height:24px;border:2px solid transparent;border-radius:8px}
+.swatch.selected{outline:2px solid white;outline-offset:2px}
+
+.notifications{position:absolute;z-index:100;top:57px;right:15px;width:min(300px,calc(100vw - 30px));display:grid;gap:8px;pointer-events:none}
+.toast{padding:12px 14px;border:1px solid #ffffff22;border-radius:12px;background:#131d31ed;backdrop-filter:blur(22px);box-shadow:0 15px 40px #0005;animation:toast-in .2s ease}
+.toast strong{font-size:10px;display:block;margin-bottom:4px}
+.toast p{font-size:9px;line-height:1.5;color:#aab7cc;margin:0}
+.toast small{display:block;font:7px var(--mono);color:#73819c;margin-top:7px}
+@keyframes toast-in{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+
+.context-menu{position:absolute;z-index:110;display:none;width:190px;padding:6px;border:1px solid var(--line);border-radius:11px;background:#0f1728f5;box-shadow:0 15px 45px #0008}
+.context-menu.show{display:block}
+.context-menu button{display:block;width:100%;text-align:left;padding:10px;border:0;border-radius:7px;background:transparent;color:#d8e1f1;font-size:9px}
+.context-menu button:hover{background:#ffffff12}
+.context-menu hr{border:0;border-top:1px solid var(--line)}
+
+.power-overlay{position:absolute;z-index:150;inset:0;background:#050811c9;backdrop-filter:blur(12px);display:none;place-items:center}
+.power-overlay.show{display:grid}
+.power-card{width:min(380px,calc(100% - 28px));padding:28px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,#19243c,#0c1322);text-align:center;box-shadow:0 30px 90px #0009}
+.power-symbol{width:50px;height:50px;border-radius:15px;margin:0 auto 18px;display:grid;place-items:center;font-size:24px;color:#ff9db5;background:#ff8acb12;border:1px solid #ff8acb30}
+.power-card h2{font-size:24px;letter-spacing:-.05em;margin:10px 0}
+.power-card>p:not(.kicker){font-size:10px;color:#9ba9c4}
+.power-actions{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:22px}
+.power-actions button{padding:10px 12px;border-radius:8px;border:1px solid var(--line);font-size:9px}
+.secondary{background:#ffffff08}.restart{background:#d9f7fb;color:#111a2b;border-color:transparent!important}.shutdown{background:#ff71831b;color:#ff9aa8;border-color:#ff71834a!important}
+.shutdown-screen{position:absolute;z-index:200;inset:0;background:#070b14;display:none;align-content:center;justify-items:center;text-align:center}
+.shutdown-screen.show{display:grid}
+.shutdown-screen .logo{font-size:54px;font-weight:800}
+.shutdown-screen .logo span{color:var(--cyan)}
+.shutdown-screen h2{font-size:17px;margin:18px 0 4px}
+.shutdown-screen p{font-size:10px;color:#8290aa}
+.shutdown-screen button{display:none;margin-top:18px;background:#ffffff0b;border:1px solid var(--line);padding:11px 15px;border-radius:9px;font-size:9px}
+.shutdown-screen button.show{display:block}
+
+@media(max-width:850px){
+  .intro{left:5%;top:14%;max-width:370px}
+  .intro h1{font-size:54px}
+  .desktop-icons{right:3%;grid-template-columns:repeat(2,68px);gap:12px 4px}
+  .widget{right:3%;width:235px}
+  .status-widget{display:none}
+}
+@media(max-width:600px){
+  .desktop{min-height:530px}
+  .menubar{height:42px;padding:0 11px}
+  .menu-left{gap:9px}.menu-left>button:not(.menu-logo),.menu-divider,.online{display:none}
+  .menu-left strong{font-size:9px}
+  .menu-right{gap:8px}
+  .clock small{font-size:7px}.clock strong{font-size:9px}
+  .intro{top:9%;left:6%;right:6%;max-width:none}
+  .intro h1{font-size:46px;margin:13px 0 8px}
+  .intro p{font-size:10px;max-width:280px}
+  .tags{margin-top:12px}.tags span{font-size:7px;padding:6px}
+  .desktop-icons{top:38%;left:4%;right:auto;grid-template-columns:repeat(3,60px);gap:9px 6px}
+  .desktop-icon{font-size:7px;min-width:57px;gap:5px;padding:5px 0}
+  .app-icon{width:35px;height:35px;border-radius:10px;font-size:18px}
+  .profile-widget{top:39%;right:4%;width:calc(100% - 240px);min-width:135px;padding:10px}
+  .profile-main{gap:7px;margin:10px 0}
+  .avatar{width:31px;height:31px;font-size:16px}
+  .profile-main h2{font-size:10px}.profile-main p{font-size:7px}
+  .stats{padding:8px 0}.stats strong{font-size:11px}.stats small{font-size:5px}
+  .quote{font-size:7px;line-height:1.5}
+  .desktop-note{left:6%;bottom:4%;right:6%}
+  .desktop-note b{font-size:7px}.desktop-note small{font-size:8px}
+  .dock-wrap{bottom:7px;gap:5px}
+  .dock{gap:4px;padding:6px;border-radius:15px}
+  .dock-app{width:32px;height:32px;border-radius:9px}
+  .dock-app .app-icon{width:28px;height:28px;border-radius:7px;font-size:15px}
+  .dock-home,.dock-power{font-size:17px}
+  .dock-separator{height:22px;margin:0}
+  .dock-caption{font-size:5px}
+  .window-layer{inset:42px 0 80px}
+  .app-window{width:calc(100vw - 16px);height:min(470px,calc(100dvh - 135px));min-height:245px;border-radius:12px}
+  .titlebar{height:39px;padding:0 9px}
+  .window-content{height:calc(100% - 39px);padding:13px}
+  .window-content h2{font-size:20px}
+  .window-subtitle{display:none}
+  .file-layout{grid-template-columns:90px 1fr;gap:8px}
+  .file-sidebar{padding-right:7px}
+  .file-sidebar button{font-size:8px;padding:8px 5px}
+  .file-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+  .file-item{min-height:75px;font-size:7px;padding:8px 3px}
+  .file-item span{font-size:19px}
+  .mini-grid{gap:6px}.mini-card{padding:9px}
+  .notifications{top:49px;right:8px}
+  .power-card{padding:22px}
+}
+@media(max-width:370px){
+  .profile-widget{display:none}
+  .desktop-icons{left:5%;grid-template-columns:repeat(3,57px)}
+  .dock{gap:3px;padding:5px}
+  .dock-app{width:29px;height:29px}
+  .dock-app .app-icon{width:25px;height:25px;font-size:13px}
+}
+</style>
+</head>
+
+<body>
+<div class="boot" id="boot">
+  <div class="boot-logo">A<span>✳</span></div>
+  <h2>ATHARVA.EXE</h2>
+  <p id="bootMessage">Preparing your personal universe…</p>
+  <div class="boot-track"><span></span></div>
+</div>
+
+<main class="desktop" id="desktop">
+  <div class="wallpaper-grid"></div>
+  <div class="glow a"></div><div class="glow b"></div>
+
+  <header class="menubar">
+    <div class="menu-left">
+      <button class="menu-logo" data-app="system" aria-label="System overview">✳</button>
+      <strong>ATHARVA.EXE</strong><span class="menu-divider"></span>
+      <button data-app="finder">Finder</button>
+      <button data-app="about">About</button>
+      <button data-app="settings">Settings</button>
+    </div>
+    <div class="menu-right">
+      <span class="online"><i></i> ONLINE</span>
+      <span>⌁</span><span>▰</span>
+      <button class="clock" id="clockButton"><small id="dateText"></small><strong id="clockText"></strong></button>
+    </div>
+  </header>
+
+  <section class="intro">
+    <div class="kicker"><span class="live-dot"></span> PERSONAL EDITION / USER 001</div>
+    <h1>Hey,<br><span>Atharva.</span></h1>
+    <p>Your desktop. Your rules. Questionable file management.</p>
+    <div class="tags"><span>BUILD 26.12</span><span>ROOMMATE MODE: ON</span></div>
+  </section>
+
+  <section class="desktop-icons" aria-label="Desktop applications">
+    <button class="desktop-icon" data-app="finder"><span class="app-icon finder-icon">▰</span><span>Finder</span></button>
+    <button class="desktop-icon" data-app="about"><span class="app-icon profile-icon">◉</span><span>About Me</span></button>
+    <button class="desktop-icon" data-app="roommate"><span class="app-icon chaos-icon">⚡</span><span>Roommate.exe</span></button>
+    <button class="desktop-icon" data-app="memories"><span class="app-icon memory-icon">▧</span><span>Memories</span></button>
+    <button class="desktop-icon" data-app="secret"><span class="app-icon secret-icon">✦</span><span>Secret Folder</span></button>
+    <button class="desktop-icon" data-app="settings"><span class="app-icon settings-icon">⚙</span><span>Settings</span></button>
+  </section>
+
+  <aside class="widget profile-widget" id="profileWidget">
+    <div class="widget-head"><span>USER PROFILE</span><span>● ACTIVE</span></div>
+    <div class="profile-main"><div class="avatar">A<span>✳</span></div><div><h2>Atharva</h2><p>Chief Chaos Officer</p></div></div>
+    <div class="stats">
+      <div><strong>∞</strong><small>CHAOS</small></div>
+      <div><strong>99%</strong><small>VIBE</small></div>
+      <div><strong>0</strong><small>CHILL</small></div>
+    </div>
+    <div class="quote">“Normal is a setting. We don't use it.”</div>
+  </aside>
+
+  <aside class="widget status-widget" id="statusWidget">
+    <div class="widget-head"><span>QUICK STATUS</span><span>LIVE</span></div>
+    <div class="status-line"><span><i></i>Mood.exe</span><strong>LEGENDARY</strong></div>
+    <div class="status-line"><span><i></i>Friendship</span><strong>CONNECTED</strong></div>
+    <div class="status-line"><span><i></i>Responsibilities</span><strong>LOADING…</strong></div>
+    <button class="widget-action" data-app="system">View system report <span>↗</span></button>
+  </aside>
+
+  <div class="desktop-note">
+    <span>✳</span><div><b>WELCOME TO YOUR DESKTOP</b><small>Open an app from the dock or double-click an icon.</small></div>
+  </div>
+
+  <div class="window-layer" id="windowLayer"></div>
+  <div class="notifications" id="notifications" aria-live="polite"></div>
+
+  <footer class="dock-wrap">
+    <div class="dock" id="dock">
+      <button class="dock-app dock-home" data-app="system" title="System">✳<i></i></button>
+      <span class="dock-separator"></span>
+      <button class="dock-app" data-app="finder" title="Finder"><span class="app-icon finder-icon">▰</span><i></i></button>
+      <button class="dock-app" data-app="about" title="About Me"><span class="app-icon profile-icon">◉</span><i></i></button>
+      <button class="dock-app" data-app="roommate" title="Roommate.exe"><span class="app-icon chaos-icon">⚡</span><i></i></button>
+      <button class="dock-app" data-app="memories" title="Memories"><span class="app-icon memory-icon">▧</span><i></i></button>
+      <button class="dock-app" data-app="secret" title="Secret Folder"><span class="app-icon secret-icon">✦</span><i></i></button>
+      <button class="dock-app" data-app="settings" title="Settings"><span class="app-icon settings-icon">⚙</span><i></i></button>
+      <span class="dock-separator"></span>
+      <button class="dock-app dock-power" id="powerButton" title="Power options">⏻</button>
+    </div>
+    <div class="dock-caption">ATHARVA'S PERSONAL UNIVERSE · EST. 2026</div>
+  </footer>
+
+  <div class="context-menu" id="contextMenu">
+    <button data-app="finder">▰ Open Finder</button>
+    <button data-app="settings">⚙ Desktop settings</button>
+    <button id="refreshDesktop">↻ Refresh desktop</button>
+    <hr>
+    <button id="contextShutdown">⏻ Power options</button>
+  </div>
+
+  <div class="power-overlay" id="powerOverlay">
+    <div class="power-card">
+      <div class="power-symbol">⏻</div>
+      <div class="kicker">SESSION CONTROL</div>
+      <h2>Leaving so soon?</h2>
+      <p>Even legends need a reboot sometimes.</p>
+      <div class="power-actions">
+        <button class="secondary" id="cancelPower">Stay here</button>
+        <button class="restart" id="restartButton">↻ Restart</button>
+        <button class="shutdown" id="shutdownButton">Shut down</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="shutdown-screen" id="shutdownScreen">
+    <div class="logo">A<span>✳</span></div>
+    <h2 id="shutdownTitle">Shutting down…</h2>
+    <p id="shutdownMessage">Saving your questionable decisions.</p>
+    <button id="wakeButton">Boot ATHARVA.EXE again ↗</button>
+  </div>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = (selector, root=document) => root.querySelector(selector);
+  const $$ = (selector, root=document) => [...root.querySelectorAll(selector)];
+  const layer = $("#windowLayer");
+  const contextMenu = $("#contextMenu");
+  const powerOverlay = $("#powerOverlay");
+  const shutdownScreen = $("#shutdownScreen");
+  let highestZ = 50;
+
+  const apps = {
+    system: {
+      title:"System Overview",icon:"✳",color:"profile-icon",subtitle:"DEVICE HEALTH / OVERVIEW",
+      body:()=>`
+        <div class="hero-card">
+          <span class="window-kicker">ATHARVA.EXE // BUILD 26.12</span>
+          <h2>Everything is running.<br><span style="color:var(--cyan)">Mostly as intended.</span></h2>
+          <p>Welcome to your own personal operating system. It has absolutely no practical purpose and an unreasonable amount of personality.</p>
+        </div>
+        <div class="mini-grid">
+          <div class="mini-card"><span>⚡</span><h3>Chaos engine</h3><p>Running at 100% capacity. No known cure.</p></div>
+          <div class="mini-card"><span>⌁</span><h3>Friendship network</h3><p>Stable connection. Unlimited nonsense.</p></div>
+          <div class="mini-card"><span>▧</span><h3>Memory storage</h3><p>Thousands of moments. Some legally questionable.</p></div>
+          <div class="mini-card"><span>✦</span><h3>Birthday protocol</h3><p>Scheduled for 10 DEC 2026. Stay suspicious.</p></div>
+        </div>`
+    },
+    finder: {
+      title:"Finder",icon:"▰",color:"finder-icon",subtitle:"YOUR FILES / YOUR BUSINESS",
+      body:()=>`
+        <div class="file-layout">
+          <nav class="file-sidebar">
+            <button class="active" data-folder="recent">◷ Recent</button>
+            <button data-folder="memories">▧ Memories</button>
+            <button data-folder="roommate">⚡ Roommate Files</button>
+            <button data-folder="secret">🔒 Secret</button>
+          </nav>
+          <div>
+            <span class="window-kicker" id="folderLabel">RECENT ITEMS</span>
+            <h2 style="font-size:18px;margin:8px 0 14px">A very organised mess.</h2>
+            <div class="file-list" id="fileList"></div>
+          </div>
+        </div>`
+    },
+    about: {
+      title:"About Atharva",icon:"◉",color:"profile-icon",subtitle:"USER PROFILE / CLASSIFIED",
+      body:()=>`
+        <div class="hero-card"><span class="window-kicker">SUBJECT FILE: ATH-001</span><h2>Atharva.</h2><p>College friend since Semester 1. Current roommate. Full-time menace. A rare model that somehow passed quality control.</p></div>
+        <div class="mini-grid">
+          <div class="mini-card"><span>🧠</span><h3>Operating style</h3><p>Confidently improvises. Calls it a plan.</p></div>
+          <div class="mini-card"><span>😂</span><h3>Primary function</h3><p>Making normal situations unnecessarily funny.</p></div>
+          <div class="mini-card"><span>🏠</span><h3>Current location</h3><p>Roommate territory. Privacy not guaranteed.</p></div>
+          <div class="mini-card"><span>🏆</span><h3>Official rank</h3><p>Certified top-tier dost. No appeal possible.</p></div>
+        </div>`
+    },
+    roommate: {
+      title:"Roommate.exe",icon:"⚡",color:"chaos-icon",subtitle:"SHARED LIVING / CHAOS REPORT",
+      body:()=>`
+        <div class="hero-card"><span class="window-kicker">ROOMMATE DIAGNOSTICS</span><h2>Compatibility: suspiciously high.</h2><p>Two people. One room. Unlimited opportunities to annoy each other. This system cannot be held responsible for what happens after midnight.</p></div>
+        <div class="setting-row"><div><strong>Borrowing without asking</strong><p>It was basically communal property.</p></div><strong style="color:var(--pink)">ENABLED</strong></div>
+        <div class="setting-row"><div><strong>Random late-night conversations</strong><p>Sleep schedule integrity compromised.</p></div><strong style="color:var(--cyan)">ACTIVE</strong></div>
+        <div class="setting-row"><div><strong>Blaming the other roommate</strong><p>Default troubleshooting protocol.</p></div><strong style="color:var(--violet)">ALWAYS</strong></div>
+        <button class="primary-button" data-action="roommate-alert">Run roommate compatibility test ↗</button>`
+    },
+    memories: {
+      title:"Memories",icon:"▧",color:"memory-icon",subtitle:"ARCHIVE / GOOD TIMES ONLY",
+      body:()=>`
+        <span class="window-kicker">PERSONAL ARCHIVE</span><h2>Saved moments.</h2><p>Some memories are screenshots. The best ones are the things you still laugh about randomly.</p>
+        <div class="memory-list">
+          <div class="memory-item"><span>🎓</span><div><strong>Semester One — The Origin Story</strong><p>When a college friendship quietly turned into a permanent side quest.</p></div></div>
+          <div class="memory-item"><span>🏠</span><div><strong>Roommate Era Unlocked</strong><p>Friendship, but now the chaos has a shared address.</p></div></div>
+          <div class="memory-item"><span>😂</span><div><strong>Unplanned Comedy</strong><p>Half the best moments were never planned. Probably never will be.</p></div></div>
+          <div class="memory-item"><span>🎂</span><div><strong>December 10 — Birthday Protocol</strong><p>A new memory is waiting to be saved.</p></div></div>
+        </div>`
+    },
+    secret: {
+      title:"Secret Folder",icon:"✦",color:"secret-icon",subtitle:"RESTRICTED ACCESS / NOT REALLY",
+      body:()=>`
+        <div class="hero-card"><span class="window-kicker">ACCESS GRANTED</span><h2>Okay, you found it.</h2><p>This folder is classified under the extremely serious category of “things your friend wanted you to know but will probably express through jokes.”</p></div>
+        <div class="memory-item"><span>💌</span><div><strong>One real message</strong><p>Jokes aside, life is genuinely better with you around. Thanks for being the kind of friend who makes ordinary days memorable. Here's to more ridiculous stories, late-night talks and years of friendship. Happy birthday, bro. ❤️</p></div></div>
+        <button class="primary-button" data-action="secret-surprise">Unlock bonus message ↗</button>`
+    },
+    settings: {
+      title:"System Settings",icon:"⚙",color:"settings-icon",subtitle:"PERSONALISE YOUR EXPERIENCE",
+      body:()=>`
+        <span class="window-kicker">APPEARANCE</span><h2>Make it yours.</h2>
+        <div class="setting-row"><div><strong>Animated wallpaper glow</strong><p>Turn the background glow on or off.</p></div><button class="switch on" data-setting="glow" aria-label="Toggle wallpaper glow"><span></span></button></div>
+        <div class="setting-row"><div><strong>Desktop widgets</strong><p>Show or hide the profile and status cards.</p></div><button class="switch on" data-setting="widgets" aria-label="Toggle desktop widgets"><span></span></button></div>
+        <div class="setting-row"><div><strong>Accent colour</strong><p>Pick your system highlight.</p></div><div class="swatches"><button class="swatch selected" data-accent="#7ce9f2" style="background:#7ce9f2" aria-label="Cyan"></button><button class="swatch" data-accent="#b5a5ff" style="background:#b5a5ff" aria-label="Violet"></button><button class="swatch" data-accent="#ff8acb" style="background:#ff8acb" aria-label="Pink"></button></div></div>
+        <div class="setting-row"><div><strong>Birthday mode</strong><p>High-priority celebration protocol.</p></div><button class="switch on" data-setting="birthday" aria-label="Toggle birthday mode"><span></span></button></div>`
+    }
+  };
+
+  const files = {
+    recent:[
+      ["📁","Birthday Stuff","FOLDER"],["📄","read_this_first.txt","TEXT FILE"],
+      ["🖼️","roommate_lore.png","IMAGE"],["🎂","december_10.exe","IMPORTANT"],
+      ["📁","Semester_One","FOLDER"],["🔒","definitely_not_secret","SUSPICIOUS"]
+    ],
+    memories:[
+      ["📁","Semester_One","FOLDER"],["📄","origin_story.txt","MEMORY"],
+      ["🖼️","chaos_archive.png","IMAGE"],["🎞️","random_moments.mp4","VIDEO"]
+    ],
+    roommate:[
+      ["⚡","roommate_rules.exe","EXECUTABLE"],["📄","who_ate_my_food.txt","CASE FILE"],
+      ["🧦","missing_socks.log","UNRESOLVED"],["☕","late_night_protocol","SYSTEM"]
+    ],
+    secret:[
+      ["🔒","open_me.txt","CLASSIFIED"],["💌","actual_message.msg","PERSONAL"],
+      ["🎁","birthday_surprise.exe","LOCKED"]
+    ]
+  };
+
+  function notify(title,message) {
+    const stack=$("#notifications");
+    const toast=document.createElement("div");
+    toast.className="toast";
+    const strong=document.createElement("strong");
+    strong.textContent="✳ "+title;
+    const p=document.createElement("p");
+    p.textContent=message;
+    const small=document.createElement("small");
+    small.textContent="ATHARVA.EXE · JUST NOW";
+    toast.append(strong,p,small);
+    stack.appendChild(toast);
+    setTimeout(()=>{
+      toast.style.opacity="0";
+      toast.style.transform="translateX(12px)";
+      setTimeout(()=>toast.remove(),250);
+    },4200);
+  }
+
+  function updateClock() {
+    const now=new Date();
+    $("#clockText").textContent=now.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
+    $("#dateText").textContent=now.toLocaleDateString([], {weekday:"short",month:"short",day:"numeric"}).toUpperCase();
+  }
+
+  function markDock(key,on) {
+    $$(`.dock-app[data-app="${key}"]`).forEach(button=>button.classList.toggle("running",on));
+  }
+
+  function renderFiles(win,folder="recent") {
+    const list=$("#fileList",win);
+    if(!list)return;
+    const label=$("#folderLabel",win);
+    label.textContent=folder.toUpperCase()+" ITEMS";
+    list.replaceChildren();
+
+    (files[folder]||files.recent).forEach(([emoji,name,type])=>{
+      const button=document.createElement("button");
+      button.className="file-item";
+      const icon=document.createElement("span");
+      icon.textContent=emoji;
+      const filename=document.createElement("div");
+      filename.textContent=name;
+      const meta=document.createElement("small");
+      meta.textContent=type;
+      button.append(icon,filename,meta);
+      button.addEventListener("click",()=>{
+        if(folder==="secret"||name.toLowerCase().includes("secret")||name.includes("surprise")){
+          openApp("secret");
+          notify("Access granted","You found something your friend left for you.");
+        }else{
+          notify(name,type==="FOLDER"?"Folder opened. Contents are mostly chaos.":"File preview: 100% suspicious, 0% useful.");
+        }
+      });
+      list.appendChild(button);
+    });
+
+    $$("[data-folder]",win).forEach(button=>button.classList.toggle("active",button.dataset.folder===folder));
+  }
+
+  function openApp(key) {
+    const app=apps[key];
+    if(!app)return;
+
+    let win=$(`[data-window="${key}"]`);
+    if(win){
+      win.classList.remove("minimized");
+      win.style.zIndex=++highestZ;
+      markDock(key,true);
+      return;
+    }
+
+    win=document.createElement("section");
+    win.className="app-window";
+    win.dataset.window=key;
+    win.style.zIndex=++highestZ;
+
+    const bar=document.createElement("header");
+    bar.className="titlebar";
+    bar.innerHTML=`
+      <span class="title-icon app-icon ${app.color}">${app.icon}</span>
+      <div class="window-title">${app.title}<span class="window-subtitle">${app.subtitle}</span></div>
+      <div class="window-controls">
+        <button class="win-control min-control" data-win="min" aria-label="Minimize window"></button>
+        <button class="win-control max-control" data-win="max" aria-label="Maximize window"></button>
+        <button class="win-control close-control" data-win="close" aria-label="Close window"></button>
+      </div>`;
+    const content=document.createElement("div");
+    content.className="window-content";
+    content.innerHTML=app.body();
+    win.append(bar,content);
+    layer.appendChild(win);
+
+    win.addEventListener("pointerdown",()=>win.style.zIndex=++highestZ);
+
+    let drag=null;
+    bar.addEventListener("pointerdown",e=>{
+      if(e.target.closest("button")||win.classList.contains("maximized"))return;
+      const rect=win.getBoundingClientRect();
+      drag={x:e.clientX-rect.left,y:e.clientY-rect.top};
+      win.style.left=rect.left+"px";
+      win.style.top=rect.top+"px";
+      win.style.transform="none";
+      bar.setPointerCapture(e.pointerId);
+    });
+    bar.addEventListener("pointermove",e=>{
+      if(!drag)return;
+      const x=Math.max(0,Math.min(innerWidth-win.offsetWidth,e.clientX-drag.x));
+      const y=Math.max(45,Math.min(innerHeight-100,e.clientY-drag.y));
+      win.style.left=x+"px";
+      win.style.top=y+"px";
+    });
+    const stopDrag=()=>drag=null;
+    bar.addEventListener("pointerup",stopDrag);
+    bar.addEventListener("pointercancel",stopDrag);
+    bar.addEventListener("lostpointercapture",stopDrag);
+
+    win.addEventListener("click",e=>{
+      const control=e.target.closest("[data-win]");
+      if(control){
+        const action=control.dataset.win;
+        if(action==="close"){win.remove();markDock(key,false)}
+        if(action==="min")win.classList.add("minimized");
+        if(action==="max"){
+          win.classList.toggle("maximized");
+          if(!win.classList.contains("maximized")){
+            win.style.left="50%";win.style.top="48%";win.style.transform="translate(-50%,-50%)";
+          }
+        }
+        return;
+      }
+
+      const folder=e.target.closest("[data-folder]");
+      if(folder){renderFiles(win,folder.dataset.folder);return}
+
+      const setting=e.target.closest("[data-setting]");
+      if(setting){
+        setting.classList.toggle("on");
+        const enabled=setting.classList.contains("on");
+        if(setting.dataset.setting==="glow")$$(".glow").forEach(el=>el.style.opacity=enabled?"1":"0");
+        if(setting.dataset.setting==="widgets"){
+          $("#profileWidget").style.display=enabled?"":"none";
+          $("#statusWidget").style.display=enabled?"":"none";
+        }
+        if(setting.dataset.setting==="birthday")notify("Birthday mode",enabled?"Celebration protocol enabled.":"Celebration protocol paused.");
+        return;
+      }
+
+      const swatch=e.target.closest("[data-accent]");
+      if(swatch){
+        $$("[data-accent]",win).forEach(el=>el.classList.toggle("selected",el===swatch));
+        document.documentElement.style.setProperty("--cyan",swatch.dataset.accent);
+        return;
+      }
+
+      const action=e.target.closest("[data-action]");
+      if(action?.dataset.action==="roommate-alert"){
+        notify("Compatibility test: PASS","Friendship score 98%. Remaining 2% reserved for stealing snacks.");
+      }
+      if(action?.dataset.action==="secret-surprise"){
+        notify("Bonus unlocked ❤️","You're a solid friend. Don't let this go to your head.");
+      }
+    });
+
+    if(key==="finder")renderFiles(win);
+    markDock(key,true);
+  }
+
+  document.addEventListener("click",e=>{
+    const appButton=e.target.closest("[data-app]");
+    if(appButton){
+      openApp(appButton.dataset.app);
+      contextMenu.classList.remove("show");
+    }
+    if(!e.target.closest("#contextMenu"))contextMenu.classList.remove("show");
+  });
+
+  $("#desktop").addEventListener("dblclick",e=>{
+    if(e.target.closest(".desktop-icons,.menubar,.dock,.app-window,.widget"))return;
+    openApp("finder");
+  });
+
+  $("#desktop").addEventListener("contextmenu",e=>{
+    if(e.target.closest(".app-window,.menubar,.dock"))return;
+    e.preventDefault();
+    contextMenu.style.left=Math.min(e.clientX,innerWidth-200)+"px";
+    contextMenu.style.top=Math.min(e.clientY,innerHeight-180)+"px";
+    contextMenu.classList.add("show");
+  });
+
+  $("#refreshDesktop").addEventListener("click",()=>{
+    contextMenu.classList.remove("show");
+    notify("Desktop refreshed","No files were organised during this process.");
+  });
+
+  $("#powerButton").addEventListener("click",()=>powerOverlay.classList.add("show"));
+  $("#contextShutdown").addEventListener("click",()=>{
+    contextMenu.classList.remove("show");
+    powerOverlay.classList.add("show");
+  });
+  $("#cancelPower").addEventListener("click",()=>powerOverlay.classList.remove("show"));
+
+  function powerDown(restart) {
+    powerOverlay.classList.remove("show");
+    shutdownScreen.classList.add("show");
+    $("#wakeButton").classList.remove("show");
+    $("#shutdownTitle").textContent=restart?"Restarting ATHARVA.EXE…":"Shutting down…";
+    $("#shutdownMessage").textContent=restart?"Rebooting the chaos engine.":"Saving your questionable decisions.";
+
+    setTimeout(()=>{
+      if(restart){
+        shutdownScreen.classList.remove("show");
+        $("#bootMessage").textContent="Restarting your personal universe…";
+        $(".boot").classList.remove("done");
+        setTimeout(()=>{
+          $(".boot").classList.add("done");
+          notify("Welcome back","System reboot complete. Chaos restored.");
+        },1800);
+      }else{
+        $("#shutdownTitle").textContent="It is now safe to close this tab.";
+        $("#shutdownMessage").textContent="Your legendary status remains saved.";
+        $("#wakeButton").classList.add("show");
+      }
+    },1100);
+  }
+
+  $("#restartButton").addEventListener("click",()=>powerDown(true));
+  $("#shutdownButton").addEventListener("click",()=>powerDown(false));
+  $("#wakeButton").addEventListener("click",()=>{
+    shutdownScreen.classList.remove("show");
+    $("#bootMessage").textContent="Waking up the chaos engine…";
+    $(".boot").classList.remove("done");
+    setTimeout(()=>{
+      $(".boot").classList.add("done");
+      notify("System online","ATHARVA.EXE is back. Unfortunately for everyone.");
+    },1700);
+  });
+
+  $("#clockButton").addEventListener("click",()=>{
+    notify("System clock","Time is passing. Your responsibilities are still loading.");
+  });
+
+  document.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){
+      contextMenu.classList.remove("show");
+      powerOverlay.classList.remove("show");
+    }
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="f"){
+      e.preventDefault();openApp("finder");
+    }
+  });
+
+  updateClock();
+  setInterval(updateClock,15000);
+
+  setTimeout(()=>{
+    $(".boot").classList.add("done");
+    setTimeout(()=>notify("Welcome, Atharva","Your personal desktop is ready. Please pretend this is a real operating system."),500);
+  },1900);
+
+  setTimeout(()=>notify("System tip","Right-click the desktop for quick actions."),5000);
+})();
+</script>
+</body>
+</html>
