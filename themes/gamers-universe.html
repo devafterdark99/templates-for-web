@@ -3,46 +3,254 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#100d27">
-  <meta name="description" content="An arcade-inspired birthday experience with pixel energy, playful challenges and collectible surprises.">
+  <meta name="theme-color" content="#080b18">
+  <meta name="description" content="The Gamer's Universe — a playable arcade birthday adventure for Atharva.">
   <title>The Gamer's Universe — The Birthday Lab</title>
-  <link rel="stylesheet" href="../css/theme-pages.css">
-  <script src="../js/theme-page.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/gamers-universe.css">
 </head>
-<body class="gamer" data-theme="gamer">
-  <div class="theme-noise"></div>
-  <header class="theme-header">
-    <a class="theme-brand" href="../index.html"><span class="theme-brand-icon">✳</span><span>THE BIRTHDAY LAB<small>CONCEPT FILE / GAMER</small></span></a>
-    <a class="back-link" href="../index.html">← ALL CONCEPTS</a>
+
+<body>
+  <header class="topbar page-shell">
+    <a class="brand" href="../index.html">
+      <span class="brand-icon">✳</span>
+      <span>THE BIRTHDAY LAB<small>CONCEPT FILE / PLAYER 01</small></span>
+    </a>
+    <div class="topbar-right">
+      <span class="server-status"><span class="status-dot"></span> ARCADE ONLINE</span>
+      <a class="back-link" href="../index.html">← ALL CONCEPTS</a>
+    </div>
   </header>
-  <main class="theme-main" data-page="gamer">
-    <section class="theme-hero">
-      <div class="theme-copy">
-        <p class="theme-kicker">PLAYER ONE / BIRTHDAY MODE</p>
-        <h1>A new game.<br><em>Your rules.</em></h1>
-        <p class="theme-lede">Welcome to a birthday built like an arcade adventure. Earn XP, unlock memories, beat ridiculous challenges and make it to the final boss.</p>
-        <button class="theme-cta" data-demo>TEST THE START BUTTON <span>↗</span></button>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">PLAYER ONE / BIRTHDAY MODE</p>
+        <h1>INSERT COIN.<br><span class="highlight">BECOME</span><br>LEGENDARY.</h1>
+        <p class="hero-description">
+          Welcome to Atharva's universe. A custom arcade adventure packed with
+          quests, ridiculous roommate lore, collectible memories and one very
+          suspicious final boss. Ready, player one?
+        </p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" id="heroStart">▶ PLAY THE GAME</button>
+          <button class="btn" id="howToPlay">⌘ HOW TO PLAY</button>
+        </div>
       </div>
-      <div class="theme-visual" aria-label="The Gamer's Universe concept visual">
-        <span class="pixel-moon">✦</span><div class="pixel-hero-mountain"></div><div class="pixel-hero-mountain two"></div><div class="pixel-platform"></div><div class="pixel-hero-player">A</div>
-        <div class="visual-footer"><span>THE BIRTHDAY LAB</span><span>CONCEPT 01 / 06</span></div>
+
+      <div class="pixel-art" aria-label="Animated pixel-art arcade landscape">
+        <span class="pixel-moon"></span>
+        <span class="star" style="top:25%;left:24%">✦</span>
+        <span class="star" style="top:47%;left:76%;animation-delay:.7s">✧</span>
+        <span class="star" style="top:22%;left:57%;animation-delay:1.2s">✦</span>
+        <span class="star" style="top:61%;left:12%;animation-delay:.3s">·</span>
+        <div class="mountain one"></div>
+        <div class="mountain two"></div>
+        <span class="pixel-coin c1"></span>
+        <span class="pixel-coin c2"></span>
+        <span class="pixel-coin c3"></span>
+        <div class="platform"></div>
+        <div class="pixel-player"></div>
+        <div class="visual-hud">
+          <span class="hud-label">PLAYER</span>
+          <span class="hud-value">ATHARVA.EXE</span>
+          <span class="hud-label" style="margin-top:8px">MISSION</span>
+          <span class="hud-value">BIRTHDAY RUN</span>
+        </div>
+        <div class="visual-tag">WORLD 01 / THE BEGINNING</div>
       </div>
-    </section>
-    <section class="theme-stat-row">
-      <div class="theme-stat"><small>GAME MODE</small><strong>ADVENTURE</strong></div><div class="theme-stat"><small>DIFFICULTY</small><strong>FRIENDSHIP</strong></div><div class="theme-stat"><small>FINAL BOSS</small><strong>BIRTHDAY</strong></div>
-    </section>
-    <section class="theme-section">
-      <div class="theme-section-heading"><div><p class="theme-kicker">WHAT THIS UNIVERSE COULD INCLUDE</p><h2>The experience.</h2></div><p>Concept preview only.<br>The full birthday build comes later.</p></div>
-      <div class="feature-grid">
-        <article class="feature-card"><span class="feature-num">01 / FEATURE</span><h3>PLAYER PROFILE</h3><p>A custom player card with stats that are deeply unserious.</p></article><article class="feature-card"><span class="feature-num">02 / FEATURE</span><h3>UNLOCKABLE LEVELS</h3><p>College memories become stages, quests and bonus rounds.</p></article><article class="feature-card"><span class="feature-num">03 / FEATURE</span><h3>BOSS BATTLE</h3><p>A final birthday challenge with a reward at the end.</p></article>
-      </div>
-    </section>
-    <section class="demo-panel">
-      <div><h2>Press start, legend.</h2><p>This concept could include a tiny playable mini-game, hidden collectibles and a final birthday level.</p></div>
-      <button class="demo-button" data-demo>TEST THE START BUTTON ↗</button>
     </section>
   </main>
-  <footer class="theme-footer"><span>THE BIRTHDAY LAB © 2026</span><a href="../index.html">BACK TO THE CONCEPT ARCHIVE ↗</a></footer>
-  <dialog class="theme-dialog" id="themeDemo"><p class="theme-kicker">INTERACTIVE CONCEPT PREVIEW</p><h2 id="demoTitle">Nice.</h2><p id="demoText">This is a concept preview.</p><button id="closeDemo">GOT IT</button></dialog>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>PLAYER ONE</span> ✦ <span>INSERT COIN</span> ✦
+      <span>COLLECT XP</span> ✦ <span>UNLOCK MEMORIES</span> ✦
+      <span>NO SAVE POINTS FOR BAD DECISIONS</span> ✦
+      <span>PLAYER ONE</span> ✦ <span>INSERT COIN</span> ✦
+      <span>COLLECT XP</span> ✦ <span>UNLOCK MEMORIES</span> ✦
+      <span>NO SAVE POINTS FOR BAD DECISIONS</span> ✦
+    </div>
+  </div>
+
+  <main class="page-shell">
+    <section class="game-section" id="arcade">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">01 / LIVE ARCADE</p>
+          <h2>Your first mission awaits.</h2>
+        </div>
+        <p>A tiny playable platformer. Grab the coins, dodge the spikes and reach the portal. Don't rage quit, bro.</p>
+      </div>
+
+      <div class="game-shell">
+        <div class="game-topline">
+          <div class="game-name">PIXEL RUNNER <span>///</span> BIRTHDAY EDITION</div>
+          <div class="game-level" id="levelLabel">WORLD 01 · THE NEON VALLEY</div>
+        </div>
+
+        <div class="game-stage">
+          <canvas id="gameCanvas" width="960" height="420" aria-label="Pixel Runner platform game"></canvas>
+
+          <div class="game-overlay" id="gameOverlay">
+            <div class="overlay-card">
+              <div class="overlay-icon" id="overlayIcon">🎮</div>
+              <h3 id="overlayTitle">READY, PLAYER ONE?</h3>
+              <p id="overlayText">Collect coins, jump over danger and make it to the glowing portal. Your roommate reputation depends on it.</p>
+              <button class="btn btn-primary" id="overlayStart">▶ START GAME</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-hud">
+          <div class="hud-stat">
+            <small>SCORE</small>
+            <strong class="cyan" id="scoreValue">0000</strong>
+          </div>
+          <div class="hud-stat">
+            <small>COINS</small>
+            <strong class="yellow" id="coinValue">0 / 8</strong>
+          </div>
+          <div class="hud-stat">
+            <small>LIVES</small>
+            <strong class="pink" id="livesValue">♥ ♥ ♥</strong>
+          </div>
+          <div class="hud-stat">
+            <small>XP EARNED</small>
+            <strong id="xpValue">000 XP</strong>
+          </div>
+        </div>
+
+        <div class="game-controls">
+          <div class="controls-copy">
+            MOVE <kbd>A</kbd> <kbd>D</kbd> or <kbd>←</kbd> <kbd>→</kbd>
+            &nbsp; JUMP <kbd>SPACE</kbd> / <kbd>W</kbd> / <kbd>↑</kbd><br>
+            Collect every coin you can. Touch the portal at the end to win.
+          </div>
+          <div class="game-action-buttons">
+            <button class="btn" id="pauseButton" disabled>Ⅱ PAUSE</button>
+            <button class="btn" id="restartButton">↻ RESTART</button>
+          </div>
+        </div>
+
+        <div class="touch-controls" aria-label="Touch game controls">
+          <div class="touch-group">
+            <button class="touch-btn" data-control="left" aria-label="Move left">←</button>
+            <button class="touch-btn" data-control="right" aria-label="Move right">→</button>
+          </div>
+          <button class="touch-btn" data-control="jump" aria-label="Jump">↑ JUMP</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard">
+      <article class="dash-card">
+        <div class="dash-icon">👾</div>
+        <p class="eyebrow">PLAYER PROFILE</p>
+        <h3>ATHARVA.EXE</h3>
+        <p>Certified chaos merchant. Roommate-class player. Main character energy: dangerously high.</p>
+        <div class="profile-stats">
+          <div class="mini-stat"><small>PLAYER LEVEL</small><strong id="profileLevel">01</strong></div>
+          <div class="mini-stat"><small>TOTAL XP</small><strong id="profileXP">000</strong></div>
+          <div class="mini-stat"><small>CHAOS</small><strong>99%</strong></div>
+          <div class="mini-stat"><small>LOYALTY</small><strong>MAX</strong></div>
+        </div>
+      </article>
+
+      <article class="dash-card">
+        <div class="dash-icon">🗺️</div>
+        <p class="eyebrow">QUEST LOG</p>
+        <h3>Mission checklist</h3>
+        <p>Every legend starts somewhere. These missions are just the beginning.</p>
+        <div class="quest-list">
+          <div class="quest-row">
+            <span class="quest-check" id="questPlay">○</span>
+            <span>Start your adventure<small>Launch Pixel Runner</small></span>
+          </div>
+          <div class="quest-row">
+            <span class="quest-check" id="questCoin">○</span>
+            <span>Coin collector<small>Collect your first coin</small></span>
+          </div>
+          <div class="quest-row">
+            <span class="quest-check" id="questWin">○</span>
+            <span>Portal conqueror<small>Reach the finish portal</small></span>
+          </div>
+          <div class="quest-row">
+            <span class="quest-check" id="questBoss">○</span>
+            <span>Boss energy<small>Inspect the final challenge</small></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dash-card">
+        <div class="dash-icon">🏆</div>
+        <p class="eyebrow">ACHIEVEMENTS</p>
+        <h3>Hall of legends</h3>
+        <p>Every action earns XP. Can you unlock the full collection?</p>
+        <div class="quest-list">
+          <div class="quest-row">
+            <span class="quest-check" id="achStart">🔒</span>
+            <span>Press Start<small>Play your first round</small></span>
+          </div>
+          <div class="quest-row">
+            <span class="quest-check" id="achCoin">🔒</span>
+            <span>Shiny Object Syndrome<small>Collect a coin</small></span>
+          </div>
+          <div class="quest-row">
+            <span class="quest-check" id="achWin">🔒</span>
+            <span>GG EZ<small>Finish the level</small></span>
+          </div>
+          <div class="quest-row">
+            <span class="quest-check" id="achScore">🔒</span>
+            <span>Score Hunter<small>Reach 500 points</small></span>
+          </div>
+        </div>
+        <button class="dash-link" id="viewAchievements">VIEW ACHIEVEMENTS ↗</button>
+      </article>
+    </section>
+
+    <section class="boss-section" id="boss">
+      <div>
+        <p class="eyebrow">FINAL STAGE / CLASSIFIED</p>
+        <h2>The roommate boss battle.</h2>
+        <p>
+          The ultimate challenge is loading. Future levels could feature inside
+          jokes, college memories, custom challenges and an actual birthday
+          surprise. For now, this is your warning: the boss fight will not be fair.
+        </p>
+        <div class="boss-health">
+          <span>BOSS HP</span>
+          <div class="health-bar"><span></span></div>
+          <span>???</span>
+        </div>
+        <button class="btn btn-pink" id="bossButton" style="margin-top:22px">⚔ INSPECT FINAL BOSS</button>
+      </div>
+      <div class="boss-art" aria-hidden="true">☠</div>
+    </section>
+
+    <footer class="footer">
+      <span>THE BIRTHDAY LAB © 2026 / CONCEPT 01</span>
+      <a href="../index.html">← BACK TO CONCEPT ARCHIVE</a>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <strong id="toastTitle">ACHIEVEMENT UNLOCKED!</strong>
+    <span id="toastText">You earned some XP.</span>
+  </div>
+
+  <div class="modal" id="infoModal" hidden>
+    <div class="modal-card">
+      <p class="eyebrow" id="modalEyebrow">PLAYER MANUAL</p>
+      <h2 id="modalTitle">How to play</h2>
+      <div id="modalContent"></div>
+      <button class="btn btn-primary" id="modalClose">GOT IT ✓</button>
+    </div>
+  </div>
+
+  <script src="../js/gamers-universe.js" defer></script>
 </body>
 </html>
