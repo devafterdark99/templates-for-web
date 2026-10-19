@@ -19,7 +19,7 @@ the-birthday-lab/
     ├── project-user.html
     ├── internet-legend.html
     ├── user-awards.html
-    └── friendship-quest.html
+    └── users-quest.html
 ```
 
 ## Run locally

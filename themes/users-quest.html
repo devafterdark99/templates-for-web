@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10231d">
+  <meta name="description" content="An interactive friendship adventure: explore the map, complete quests, collect badges and unlock the birthday treasure.">
+  <title>Friendship Quest — The Birthday Lab</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700;800&family=IM+Fell+English:ital@0;1&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/users-quest.css">
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="../index.html">
+      <span class="brand-icon">✳</span>
+      <span>THE BIRTHDAY LAB<small>CONCEPT FILE / FRIENDSHIP QUEST</small></span>
+    </a>
+
+    <nav class="topnav" aria-label="Main navigation">
+      <a href="#map">THE MAP</a>
+      <a href="#quests">QUEST LOG</a>
+      <button class="nav-button inventory-button" id="inventoryButton" type="button">
+        🎒 INVENTORY <span class="inventory-count" id="inventoryCount">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="map">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="tiny-icon">⚔</span> QUEST LOG / PLAYER 001 + 002</div>
+        <h1>Every friendship<br><em>has a story.</em></h1>
+        <p class="hero-description">
+          Two idiots. One legendary friendship. An unreasonable number of side quests.
+          Explore the map, collect memories, earn XP and discover the treasure waiting at the end.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn-primary" href="#quests">BEGIN THE ADVENTURE <span>↗</span></a>
+          <button class="btn-ghost" id="randomQuest" type="button">🎲 RANDOM QUEST</button>
+        </div>
+
+        <div class="hero-note"><span>✦</span> NO FAST TRAVEL. THE MEMORIES ARE THE JOURNEY.</div>
+      </div>
+
+      <div class="map-wrap">
+        <div class="map-heading">
+          <span>FIELD MAP · 001</span>
+          <span>CLICK A LOCATION TO EXPLORE ↘</span>
+        </div>
+
+        <div class="map-frame">
+          <div class="map-canvas" id="mapCanvas">
+            <svg viewBox="0 0 600 530" role="img" aria-label="Illustrated parchment map with forests, mountains, a river, a castle and a winding friendship trail" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="parchment" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#f1dfb5"/>
+                  <stop offset=".55" stop-color="#d9c18e"/>
+                  <stop offset="1" stop-color="#e9d5a7"/>
+                </linearGradient>
+                <linearGradient id="river" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#85bca3"/>
+                  <stop offset="1" stop-color="#477e6c"/>
+                </linearGradient>
+                <pattern id="papergrain" width="38" height="38" patternUnits="userSpaceOnUse">
+                  <circle cx="5" cy="9" r="1" fill="#816c43" opacity=".18"/>
+                  <circle cx="26" cy="23" r="1.2" fill="#816c43" opacity=".13"/>
+                  <path d="M2 32 l7 -1 M20 5 l5 1" stroke="#816c43" stroke-width=".7" opacity=".14"/>
+                </pattern>
+                <g id="pine">
+                  <path d="M0 0 L-17 27 H-7 L-21 45 H21 L7 27 H17 Z" fill="#365941" stroke="#254a36" stroke-width="1.5"/>
+                  <path d="M0 9 V43" stroke="#b9a46e" stroke-width="1.4" opacity=".7"/>
+                </g>
+                <g id="hill">
+                  <path d="M0 35 Q35 -10 70 35 Q35 22 0 35" fill="#99a36f" stroke="#657b54" stroke-width="1.5"/>
+                </g>
+              </defs>
+
+              <rect width="600" height="530" fill="url(#parchment)"/>
+              <rect width="600" height="530" fill="url(#papergrain)"/>
+
+              <!-- Ancient contour lines -->
+              <g fill="none" stroke="#a18b5d" stroke-width="1.2" opacity=".4">
+                <path d="M-40 130 Q50 70 130 125 T310 110 T480 135 T650 90"/>
+                <path d="M-40 140 Q50 80 130 135 T310 120 T480 145 T650 100"/>
+                <path d="M-40 150 Q50 90 130 145 T310 130 T480 155 T650 110"/>
+                <path d="M-30 390 Q80 340 160 390 T330 370 T500 400 T640 370"/>
+                <path d="M-30 402 Q80 352 160 402 T330 382 T500 412 T640 382"/>
+                <path d="M-30 414 Q80 364 160 414 T330 394 T500 424 T640 394"/>
+              </g>
+
+              <!-- Mountain range -->
+              <path d="M0 165 L73 70 L120 125 L188 28 L248 118 L300 58 L355 137 L420 61 L484 126 L545 52 L620 155 L620 250 L0 250 Z" fill="#9b9a72"/>
+              <path d="M30 156 L73 70 L105 111 L84 105 L73 91 L59 119 L50 121 Z" fill="#f5e6c3"/>
+              <path d="M145 105 L188 28 L229 104 L205 88 L188 51 L172 82 L163 79 Z" fill="#f8e9c7"/>
+              <path d="M269 106 L300 58 L334 119 L311 103 L300 78 L288 99 Z" fill="#f3e3bd"/>
+              <path d="M392 111 L420 61 L454 109 L432 94 L420 79 L408 97 Z" fill="#f4e5c1"/>
+              <path d="M520 93 L545 52 L578 116 L556 98 L545 69 L533 93 Z" fill="#f8e9c7"/>
+              <path d="M0 180 Q120 125 230 190 T460 177 T620 170 L620 270 L0 270 Z" fill="#687e58"/>
+
+              <!-- Forests -->
+              <g opacity=".98">
+                <use href="#pine" x="28" y="192"/><use href="#pine" x="54" y="209"/>
+                <use href="#pine" x="86" y="185"/><use href="#pine" x="116" y="215"/>
+                <use href="#pine" x="151" y="187"/><use href="#pine" x="174" y="212"/>
+                <use href="#pine" x="202" y="190"/><use href="#pine" x="238" y="209"/>
+                <use href="#pine" x="283" y="193"/><use href="#pine" x="311" y="215"/>
+                <use href="#pine" x="344" y="194"/><use href="#pine" x="377" y="213"/>
+                <use href="#pine" x="411" y="190"/><use href="#pine" x="444" y="210"/>
+                <use href="#pine" x="478" y="188"/><use href="#pine" x="508" y="211"/>
+                <use href="#pine" x="546" y="190"/><use href="#pine" x="575" y="209"/>
+              </g>
+
+              <!-- Grassland -->
+              <path d="M0 255 Q85 218 160 275 T320 267 T470 252 T620 278 L620 530 L0 530 Z" fill="#c6c18b"/>
+              <path d="M0 270 Q95 236 165 292 T320 281 T475 269 T620 293 L620 530 L0 530 Z" fill="#b6b780"/>
+              <use href="#hill" x="28" y="282"/><use href="#hill" x="140" y="305"/>
+              <use href="#hill" x="365" y="290"/><use href="#hill" x="488" y="325"/>
+
+              <!-- River -->
+              <path d="M620 266 C535 290 555 336 475 352 S370 322 342 370 S268 416 236 445 S110 455 0 500 L0 530 L50 530 C140 484 242 483 274 448 S361 401 390 378 S489 384 511 345 S567 313 620 305 Z" fill="url(#river)" stroke="#f0e0b6" stroke-width="3"/>
+              <path d="M620 282 C548 305 570 344 482 363 S380 340 350 383 S269 430 246 456 S126 469 30 515" fill="none" stroke="#c6e0bc" stroke-width="3" stroke-dasharray="9 9" opacity=".8"/>
+
+              <!-- Bridges -->
+              <g stroke="#5b472b" stroke-width="4" fill="#c4a16a">
+                <path d="M422 357 l22 23 M430 352 l22 23"/>
+                <path d="M172 458 l12 20 M183 454 l12 20"/>
+              </g>
+
+              <!-- Castle -->
+              <g transform="translate(443 235)" stroke="#5d6546" stroke-width="2">
+                <rect x="-36" y="-2" width="72" height="48" fill="#e5d0a0"/>
+                <rect x="-47" y="-23" width="20" height="69" fill="#e8d5aa"/>
+                <rect x="27" y="-23" width="20" height="69" fill="#e8d5aa"/>
+                <rect x="-18" y="-17" width="36" height="63" fill="#ead7ad"/>
+                <path d="M-47 -23 l10 -15 l10 15 M27 -23 l10 -15 l10 15 M-18 -17 l18 -16 l18 16" fill="#9e7e4e"/>
+                <path d="M-8 46 V22 Q0 8 8 22 V46" fill="#6b5737"/>
+                <g fill="#668164" stroke="none">
+                  <rect x="-39" y="-10" width="5" height="8"/><rect x="33" y="-10" width="5" height="8"/>
+                  <rect x="-9" y="-3" width="5" height="8"/><rect x="6" y="-3" width="5" height="8"/>
+                </g>
+                <path d="M-47 -38 V-55 M-47 -55 L-26 -49 L-47 -42" fill="#a24f39" stroke="#6e4831"/>
+              </g>
+
+              <!-- Campsite -->
+              <g transform="translate(98 354)">
+                <path d="M-28 24 L0 -20 L28 24 Z" fill="#a46c43" stroke="#67452d" stroke-width="2"/>
+                <path d="M0 -20 L0 24 H28 Z" fill="#d4a76b" stroke="#67452d" stroke-width="2"/>
+                <path d="M-7 24 L0 8 L8 24" fill="#344d39"/>
+                <path d="M-40 27 Q0 38 40 27" fill="none" stroke="#6d7b4b" stroke-width="3"/>
+                <circle cx="0" cy="43" r="5" fill="#b76d32"/>
+              </g>
+
+              <!-- Ruined tower -->
+              <g transform="translate(515 394)" stroke="#69714b" stroke-width="2">
+                <path d="M-19 38 V-10 L-12 -20 L-4 -9 L3 -23 L14 -8 L19 38 Z" fill="#d6c79a"/>
+                <rect x="-7" y="15" width="14" height="23" fill="#726646"/>
+                <path d="M-20 -10 H20" stroke="#aa9463"/>
+              </g>
+
+              <!-- Hand-drawn dotted path -->
+              <path d="M70 430 C90 392 115 390 148 368 S200 340 226 316 S260 285 288 300 S335 337 362 311 S390 274 422 270 S472 280 490 240" fill="none" stroke="#fff1c7" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 13"/>
+              <path d="M70 430 C90 392 115 390 148 368 S200 340 226 316 S260 285 288 300 S335 337 362 311 S390 274 422 270 S472 280 490 240" fill="none" stroke="#6b653f" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="2 13"/>
+
+              <!-- Map decorations -->
+              <g transform="translate(530 72)" stroke="#5c6041" fill="none" stroke-width="2">
+                <circle r="27"/><circle r="19"/>
+                <path d="M0 -34 L6 -4 L30 0 L6 5 L0 34 L-6 5 L-30 0 L-6 -4 Z" fill="#e8d7aa"/>
+                <path d="M0 -18 V18 M-18 0 H18"/>
+              </g>
+              <g fill="#7b5b30" font-family="Georgia,serif" font-style="italic">
+                <text x="25" y="50" font-size="15">The Wildlands</text>
+                <text x="350" y="180" font-size="13">Friendship Forest</text>
+                <text x="35" y="505" font-size="12">River of Memories</text>
+              </g>
+              <g fill="#f5e8c3" opacity=".9">
+                <path d="M205 235 l4 9 l9 4 l-9 4 l-4 9 l-4 -9 l-9 -4 l9 -4 Z"/>
+                <path d="M363 210 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3 Z"/>
+                <path d="M552 310 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3 Z"/>
+              </g>
+            </svg>
+
+            <button class="map-node" style="left:16%;top:78%" data-quest="0" aria-label="Explore Origin Village" title="Origin Village">🏡</button>
+            <button class="map-node" style="left:38%;top:60%" data-quest="1" aria-label="Explore Friendship Forest" title="Friendship Forest">🌲</button>
+            <button class="map-node" style="left:61%;top:58%" data-quest="2" aria-label="Explore College Kingdom" title="College Kingdom">🎓</button>
+            <button class="map-node" style="left:74%;top:42%" data-quest="3" aria-label="Explore Chaos Valley" title="Chaos Valley">⚡</button>
+            <button class="map-node" style="left:84%;top:76%" data-quest="4" aria-label="Explore Campfire Cove" title="Campfire Cove">🔥</button>
+            <button class="map-node treasure locked" style="left:81%;top:24%" id="treasureMapNode" data-treasure aria-label="Birthday treasure, currently locked" title="Birthday Treasure">🔒</button>
+
+            <div class="map-caption">X marks the memories! ↗</div>
+          </div>
+
+          <div class="map-legend">
+            <span>🟡 Unexplored</span>
+            <span>✓ Completed</span>
+            <span>🔒 Locked treasure</span>
+          </div>
+        </div>
+        <div class="map-stamp">OFFICIAL<br>QUEST MAP<br>✦ 2026 ✦</div>
+      </div>
+    </section>
+
+    <div class="hero-bottom-label">
+      <span>✳ THE BIRTHDAY LAB</span>
+      <span>CONCEPT 06 / 06 · FRIENDSHIP QUEST</span>
+    </div>
+
+    <section class="stats" aria-label="Adventure statistics">
+      <div class="stat">
+        <span class="stat-icon">⛰</span>
+        <div><small>QUESTS CLEARED</small><strong id="questStat">0 / 5</strong></div>
+      </div>
+      <div class="stat">
+        <span class="stat-icon">⚔</span>
+        <div><small>PLAYER XP</small><strong id="xpStat">0 XP</strong></div>
+      </div>
+      <div class="stat">
+        <span class="stat-icon">🎒</span>
+        <div><small>COLLECTIBLES</small><strong id="badgeStat">0 / 5</strong></div>
+      </div>
+      <div class="stat">
+        <span class="stat-icon">🏆</span>
+        <div><small>PLAYER RANK</small><strong id="rankStat">ROOKIE</strong></div>
+      </div>
+    </section>
+
+    <section class="progress-section" aria-label="Quest progress">
+      <div class="progress-top">
+        <span>YOUR ADVENTURE PROGRESS</span>
+        <span id="progressText">0% COMPLETE</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-label="Adventure completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </section>
+
+    <section class="paper-section paper-texture" id="quests">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <div>
+            <div class="eyebrow"><span>✦</span> THE ADVENTURER'S JOURNAL</div>
+            <h2>Choose your next quest.</h2>
+          </div>
+          <p>Every checkpoint holds a story. Some are chaotic, some are wholesome. All are part of the lore.</p>
+        </div>
+
+        <div class="quest-toolbar reveal">
+          <div class="filters" aria-label="Filter quests">
+            <button class="filter-btn active" type="button" data-filter="all">ALL QUESTS</button>
+            <button class="filter-btn" type="button" data-filter="origin">ORIGINS</button>
+            <button class="filter-btn" type="button" data-filter="chaos">CHAOS</button>
+            <button class="filter-btn" type="button" data-filter="wholesome">WHOLESOME</button>
+          </div>
+          <div class="quest-count" id="questCount">5 quests waiting for you ✦</div>
+        </div>
+
+        <div class="quest-grid" id="questGrid">
+          <article class="quest-card reveal" data-id="0" data-category="origin">
+            <div class="quest-card-top"><span class="quest-number">CHECKPOINT / 001</span><span class="quest-icon">🏡</span></div>
+            <span class="quest-tag">ORIGIN STORY</span>
+            <h3>Once Upon a Semester</h3>
+            <p>Every great saga begins somewhere. Revisit the beginning, the first conversations and how two people became a team.</p>
+            <div class="quest-card-bottom">
+              <div class="xp-label">QUEST REWARD<strong>+100 XP</strong></div>
+              <button class="quest-open" type="button" data-open="0">EXPLORE ↗</button>
+            </div>
+          </article>
+
+          <article class="quest-card reveal" data-id="1" data-category="wholesome">
+            <div class="quest-card-top"><span class="quest-number">CHECKPOINT / 002</span><span class="quest-icon">🌲</span></div>
+            <span class="quest-tag">MEMORY COLLECTION</span>
+            <h3>The Friendship Forest</h3>
+            <p>Collect the small things: random conversations, shared jokes, late-night talks and memories that became your favourite stories.</p>
+            <div class="quest-card-bottom">
+              <div class="xp-label">QUEST REWARD<strong>+150 XP</strong></div>
+              <button class="quest-open" type="button" data-open="1">EXPLORE ↗</button>
+            </div>
+          </article>
+
+          <article class="quest-card reveal" data-id="2" data-category="origin">
+            <div class="quest-card-top"><span class="quest-number">CHECKPOINT / 003</span><span class="quest-icon">🎓</span></div>
+            <span class="quest-tag">COLLEGE KINGDOM</span>
+            <h3>The Academic Alliance</h3>
+            <p>Survive deadlines, assignments, lectures and the legendary side missions that happen between classes.</p>
+            <div class="quest-card-bottom">
+              <div class="xp-label">QUEST REWARD<strong>+125 XP</strong></div>
+              <button class="quest-open" type="button" data-open="2">EXPLORE ↗</button>
+            </div>
+          </article>
+
+          <article class="quest-card reveal" data-id="3" data-category="chaos">
+            <div class="quest-card-top"><span class="quest-number">CHECKPOINT / 004</span><span class="quest-icon">⚡</span></div>
+            <span class="quest-tag">HIGH CHAOS ZONE</span>
+            <h3>Chaos Valley</h3>
+            <p>Enter the land of nonsense, questionable decisions, dramatic reactions and jokes that absolutely should not be explained to outsiders.</p>
+            <div class="quest-card-bottom">
+              <div class="xp-label">QUEST REWARD<strong>+175 XP</strong></div>
+              <button class="quest-open" type="button" data-open="3">EXPLORE ↗</button>
+            </div>
+          </article>
+
+          <article class="quest-card reveal" data-id="4" data-category="wholesome">
+            <div class="quest-card-top"><span class="quest-number">CHECKPOINT / 005</span><span class="quest-icon">🔥</span></div>
+            <span class="quest-tag">CAMPFIRE MOMENT</span>
+            <h3>Always on Your Team</h3>
+            <p>Pause the adventure. Appreciate the person, the friendship and the memories still waiting to happen.</p>
+            <div class="quest-card-bottom">
+              <div class="xp-label">QUEST REWARD<strong>+200 XP</strong></div>
+              <button class="quest-open" type="button" data-open="4">EXPLORE ↗</button>
+            </div>
+          </article>
+
+          <article class="quest-card reveal" data-category="bonus">
+            <div class="quest-card-top"><span class="quest-number">BONUS / ∞</span><span class="quest-icon">🧭</span></div>
+            <span class="quest-tag">OPTIONAL SIDE QUEST</span>
+            <h3>Make a New Memory</h3>
+            <p>Your adventure isn't finished. Plan one new thing to do together and turn it into the next chapter of your story.</p>
+            <div class="quest-card-bottom">
+              <div class="xp-label">QUEST REWARD<strong>BRAGGING RIGHTS</strong></div>
+              <button class="quest-open" type="button" id="bonusQuest">ACCEPT QUEST ↗</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="side-quest-band" id="inventory">
+      <div class="side-quest-inner">
+        <div class="side-quest-copy reveal">
+          <div class="eyebrow"><span>🎒</span> YOUR ADVENTURER'S INVENTORY</div>
+          <h2>Small things.<br>Legendary loot.</h2>
+          <p>
+            Every completed checkpoint earns a collectible. Gather all five to fill your inventory with the official badges of this friendship adventure.
+          </p>
+          <button class="btn-primary" id="viewInventory" type="button">VIEW MY COLLECTION ↗</button>
+        </div>
+
+        <div class="collectibles reveal" id="collectibles">
+          <div class="collectible" data-badge="0"><div class="collectible-icon">🧭</div><strong>THE EXPLORER</strong><small>Origin discovered</small></div>
+          <div class="collectible" data-badge="1"><div class="collectible-icon">🌿</div><strong>MEMORY KEEPER</strong><small>Forest explored</small></div>
+          <div class="collectible" data-badge="2"><div class="collectible-icon">🎓</div><strong>SURVIVOR</strong><small>Kingdom cleared</small></div>
+          <div class="collectible" data-badge="3"><div class="collectible-icon">⚡</div><strong>CHAOS MASTER</strong><small>Valley conquered</small></div>
+          <div class="collectible" data-badge="4"><div class="collectible-icon">❤️</div><strong>DAY-ONE LEGEND</strong><small>Campfire reached</small></div>
+          <div class="collectible" data-badge="treasure"><div class="collectible-icon">👑</div><strong>LEGEND STATUS</strong><small>Treasure unlocked</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="treasure-section" id="treasure">
+      <div class="treasure-icon" id="treasureIcon">🔒</div>
+      <div class="eyebrow" style="justify-content:center">THE FINAL DESTINATION</div>
+      <h2>The greatest treasure<br>is <em>the story itself.</em></h2>
+      <p id="treasureDescription">
+        Five checkpoints stand between you and the birthday treasure. Complete the adventure to unlock the final surprise.
+      </p>
+      <div class="treasure-progress">
+        <span id="treasureProgressText">0 OF 5 CHECKPOINTS COMPLETED</span>
+        <div class="progress-track"><div class="progress-fill" id="treasureProgressFill"></div></div>
+      </div>
+      <button class="btn-primary" id="treasureButton" type="button">TREASURE LOCKED 🔒</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>✳ THE BIRTHDAY LAB © 2026 · CONCEPT 06 / 06</span>
+    <a href="../index.html">← BACK TO ALL CONCEPTS</a>
+  </footer>
+
+  <dialog class="quest-dialog" id="questDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-content">
+      <div class="dialog-top">
+        <div class="dialog-icon" id="dialogIcon">🏡</div>
+        <button class="dialog-close" id="closeDialog" type="button" aria-label="Close quest">✕</button>
+      </div>
+      <p class="dialog-kicker" id="dialogKicker">CHECKPOINT / 001</p>
+      <h2 id="dialogTitle">Once Upon a Semester</h2>
+      <div class="dialog-description" id="dialogDescription"></div>
+      <div class="dialog-reward">
+        <span>QUEST REWARD</span>
+        <strong id="dialogReward">+100 XP · EXPLORER BADGE</strong>
+      </div>
+      <div class="dialog-actions">
+        <button class="btn-primary" id="completeQuest" type="button">COMPLETE QUEST ✓</button>
+        <button class="btn-ghost" id="closeDialogSecondary" type="button">MAYBE LATER</button>
+      </div>
+      <div class="treasure-message" id="treasureMessage"></div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="../js/users-quest.js" defer></script>
+</body>
+</html>

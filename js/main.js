@@ -4,7 +4,7 @@ const themes = {
   classified: { name: "Project Atharva", subtitle: "TOP SECRET. EXTREMELY SUSPECT.", page: "themes/project-user.html" },
   internet: { name: "Internet Legend '26", subtitle: "CERTIFIED INTERNET MENACE.", page: "themes/internet-legend.html" },
   awards: { name: "The Atharva Awards", subtitle: "ONE LEGEND. ZERO CHILL.", page: "themes/user-awards.html" },
-  quest: { name: "The Friendship Quest", subtitle: "ONE FRIENDSHIP. MANY SIDE QUESTS.", page: "themes/friendship-quest.html" }
+  quest: { name: "The Friendship Quest", subtitle: "ONE FRIENDSHIP. MANY SIDE QUESTS.", page: "themes/users-quest.html" }
 };
 
 const selectionName = document.getElementById("selectionName");
