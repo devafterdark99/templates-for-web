@@ -1,9 +1,9 @@
 const themes = {
   gamer: { name: "The Gamer's Universe", subtitle: "PLAYER ONE. BIRTHDAY MODE.", page: "themes/gamers-universe.html" },
-  os: { name: "ATHARVA.EXE", subtitle: "BOOTING UP YOUR BIRTHDAY.", page: "themes/atharva-os.html" },
-  classified: { name: "Project Atharva", subtitle: "TOP SECRET. EXTREMELY SUSPECT.", page: "themes/project-atharva.html" },
+  os: { name: "ATHARVA.EXE", subtitle: "BOOTING UP YOUR BIRTHDAY.", page: "themes/user-os.html" },
+  classified: { name: "Project Atharva", subtitle: "TOP SECRET. EXTREMELY SUSPECT.", page: "themes/project-user.html" },
   internet: { name: "Internet Legend '26", subtitle: "CERTIFIED INTERNET MENACE.", page: "themes/internet-legend.html" },
-  awards: { name: "The Atharva Awards", subtitle: "ONE LEGEND. ZERO CHILL.", page: "themes/atharva-awards.html" },
+  awards: { name: "The Atharva Awards", subtitle: "ONE LEGEND. ZERO CHILL.", page: "themes/user-awards.html" },
   quest: { name: "The Friendship Quest", subtitle: "ONE FRIENDSHIP. MANY SIDE QUESTS.", page: "themes/friendship-quest.html" }
 };
 

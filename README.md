@@ -15,10 +15,10 @@ the-birthday-lab/
 │   └── theme-page.js
 └── themes/
     ├── gamers-universe.html
-    ├── atharva-os.html
-    ├── project-atharva.html
+    ├── user-os.html
+    ├── project-user.html
     ├── internet-legend.html
-    ├── atharva-awards.html
+    ├── user-awards.html
     └── friendship-quest.html
 ```
 
