@@ -28,7 +28,7 @@
       status: "PAGE LOADED — LEGENDARY STATUS VERIFIED.",
       label: "WIKI / USER PROFILE",
       title: "THE LEGEND<br><span>WIKI.</span>",
-      description: "Species: college legend. Natural habitat: campus and hostel. Special ability: making ordinary moments memorable. Weakness: birthday surprises.",
+      description: "Species: college legend. Natural habitat: campus and hostel. Special ability: making ordinary moments memorable. Weakness: unexpected surprises.",
       emoji: ["🧠", "★", "☕"],
       links: [["[ VIEW AWARDS ]", "awards"], ["[ BACK HOME ]", "home"]]
     },
@@ -55,7 +55,7 @@
       status: "SECRET PAGE FOUND — YOU WERE WARNED.",
       label: "RESTRICTED / EASTER EGG 001",
       title: "YOU FOUND<br><span>THE SECRET.</span>",
-      description: "Congratulations. You clicked a suspicious button on a birthday website. This officially qualifies as your most important achievement of the day. Reward: one imaginary trophy and unlimited friendship points.",
+      description: "Congratulations. You clicked a suspicious button on an interactive website. This officially qualifies as your most important achievement of the day. Reward: one imaginary trophy and unlimited friendship points.",
       emoji: ["🔐", "✦", "🎁"],
       links: [["[ BACK TO HOME ]", "home"], ["[ HALL OF FAME ]", "awards"]]
     },
@@ -182,7 +182,7 @@
     secret: {
       label: "EASTER EGG / 001",
       title: "YOU FOUND THE SECRET!",
-      text: "The internet has selected you for a rare reward: +999 friendship points. In the final birthday version, this can reveal a hidden letter or surprise."
+      text: "The internet has selected you for a rare reward: +999 friendship points. In the finished experience, this can reveal a hidden letter or surprise."
     },
     error: {
       label: "SYSTEM ERROR / 404",
@@ -190,9 +190,9 @@
       text: "The server could not process this much personality. Please restart your browser, drink water and try being slightly less iconic."
     },
     surprise: {
-      label: "SPECIAL DELIVERY / 10 DEC",
-      title: "HAPPY BIRTHDAY, USER!",
-      text: "This is the preview of the final birthday surprise. Replace this message with your own wishes, shared memories and the reveal for your physical gift."
+      label: "BONUS CONTENT / UNLOCKED",
+      title: "Quest complete, User!",
+      text: "This is a preview of the bonus content. Add a personal message, shared memories or another surprise here."
     }
   };
 

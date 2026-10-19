@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080d18">
-<meta name="description" content="USER.EXE — User's personal birthday operating system.">
+<meta name="description" content="USER.EXE — a customizable personal desktop experience.">
 <title>USER.EXE — Personal Desktop</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -397,7 +397,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
           <div class="mini-card"><span>⚡</span><h3>Chaos engine</h3><p>Running at 100% capacity. No known cure.</p></div>
           <div class="mini-card"><span>⌁</span><h3>Friendship network</h3><p>Stable connection. Unlimited nonsense.</p></div>
           <div class="mini-card"><span>▧</span><h3>Memory storage</h3><p>Thousands of moments. Some legally questionable.</p></div>
-          <div class="mini-card"><span>✦</span><h3>Birthday protocol</h3><p>Scheduled for 10 DEC 2026. Stay suspicious.</p></div>
+          <div class="mini-card"><span>✦</span><h3>Profile sync</h3><p>Settings synced across all apps. Stay suspicious.</p></div>
         </div>`
     },
     finder: {
@@ -445,14 +445,14 @@ button:disabled{opacity:.4;cursor:not-allowed}
           <div class="memory-item"><span>🎓</span><div><strong>Semester One — The Origin Story</strong><p>When a college friendship quietly turned into a permanent side quest.</p></div></div>
           <div class="memory-item"><span>🏠</span><div><strong>Roommate Era Unlocked</strong><p>Friendship, but now the chaos has a shared address.</p></div></div>
           <div class="memory-item"><span>😂</span><div><strong>Unplanned Comedy</strong><p>Half the best moments were never planned. Probably never will be.</p></div></div>
-          <div class="memory-item"><span>🎂</span><div><strong>December 10 — Birthday Protocol</strong><p>A new memory is waiting to be saved.</p></div></div>
+          <div class="memory-item"><span>✦</span><div><strong>Profile Sync — System Log</strong><p>A new memory is waiting to be saved.</p></div></div>
         </div>`
     },
     secret: {
       title:"Secret Folder",icon:"✦",color:"secret-icon",subtitle:"RESTRICTED ACCESS / NOT REALLY",
       body:()=>`
         <div class="hero-card"><span class="window-kicker">ACCESS GRANTED</span><h2>Okay, you found it.</h2><p>This folder is classified under the extremely serious category of “things your friend wanted you to know but will probably express through jokes.”</p></div>
-        <div class="memory-item"><span>💌</span><div><strong>One real message</strong><p>Jokes aside, life is genuinely better with you around. Thanks for being the kind of friend who makes ordinary days memorable. Here's to more ridiculous stories, late-night talks and years of friendship. Happy birthday, bro. ❤️</p></div></div>
+        <div class="memory-item"><span>💌</span><div><strong>One real message</strong><p>Jokes aside, life is genuinely better with you around. Thanks for being the kind of friend who makes ordinary days memorable. Here's to more ridiculous stories, late-night talks and years of friendship. ❤️</p></div></div>
         <button class="primary-button" data-action="secret-surprise">Unlock bonus message ↗</button>`
     },
     settings: {
@@ -462,14 +462,14 @@ button:disabled{opacity:.4;cursor:not-allowed}
         <div class="setting-row"><div><strong>Animated wallpaper glow</strong><p>Turn the background glow on or off.</p></div><button class="switch on" data-setting="glow" aria-label="Toggle wallpaper glow"><span></span></button></div>
         <div class="setting-row"><div><strong>Desktop widgets</strong><p>Show or hide the profile and status cards.</p></div><button class="switch on" data-setting="widgets" aria-label="Toggle desktop widgets"><span></span></button></div>
         <div class="setting-row"><div><strong>Accent colour</strong><p>Pick your system highlight.</p></div><div class="swatches"><button class="swatch selected" data-accent="#7ce9f2" style="background:#7ce9f2" aria-label="Cyan"></button><button class="swatch" data-accent="#b5a5ff" style="background:#b5a5ff" aria-label="Violet"></button><button class="swatch" data-accent="#ff8acb" style="background:#ff8acb" aria-label="Pink"></button></div></div>
-        <div class="setting-row"><div><strong>Birthday mode</strong><p>High-priority celebration protocol.</p></div><button class="switch on" data-setting="birthday" aria-label="Toggle birthday mode"><span></span></button></div>`
+        <div class="setting-row"><div><strong>Focus mode</strong><p>Keep your desktop experience distraction-free.</p></div><button class="switch on" data-setting="focus" aria-label="Toggle focus mode"><span></span></button></div>`
     }
   };
 
   const files = {
     recent:[
-      ["📁","Birthday Stuff","FOLDER"],["📄","read_this_first.txt","TEXT FILE"],
-      ["🖼️","roommate_lore.png","IMAGE"],["🎂","december_10.exe","IMPORTANT"],
+      ["📁","Personal Files","FOLDER"],["📄","read_this_first.txt","TEXT FILE"],
+      ["🖼️","roommate_lore.png","IMAGE"],["⚙️","profile_sync.exe","SYSTEM"],
       ["📁","Semester_One","FOLDER"],["🔒","definitely_not_secret","SUSPICIOUS"]
     ],
     memories:[
@@ -482,7 +482,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
     ],
     secret:[
       ["🔒","open_me.txt","CLASSIFIED"],["💌","actual_message.msg","PERSONAL"],
-      ["🎁","birthday_surprise.exe","LOCKED"]
+      ["✦","bonus_content.exe","LOCKED"]
     ]
   };
 
@@ -630,7 +630,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
           $("#profileWidget").style.display=enabled?"":"none";
           $("#statusWidget").style.display=enabled?"":"none";
         }
-        if(setting.dataset.setting==="birthday")notify("Birthday mode",enabled?"Celebration protocol enabled.":"Celebration protocol paused.");
+        if(setting.dataset.setting==="focus")notify("Focus mode",enabled?"Focus mode enabled.":"Focus mode paused.");
         return;
       }
 

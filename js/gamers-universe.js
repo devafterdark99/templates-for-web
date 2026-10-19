@@ -626,8 +626,8 @@
            </div>
            <p><strong style="color:#ff4d9d">KNOWN ABILITIES</strong></p>
            <p>• Steals the last snack without warning.<br>• Says “bas 5 minute” and disappears for an hour.<br>• Has a suspiciously high chaos stat.<br>• Can turn a normal day into a side quest.</p>
-           <p>Weakness: friendship, food and a well-timed birthday surprise.</p>
-           <p style="color:#45f6e8">MORE BOSS DETAILS UNLOCK IN THE FULL BIRTHDAY BUILD.</p>`
+           <p>Weakness: friendship, food and a well-timed team effort.</p>
+           <p style="color:#45f6e8">MORE BOSS DETAILS UNLOCK IN THE FULL GAME BUILD.</p>`
         );
       }
 

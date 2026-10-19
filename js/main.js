@@ -2,7 +2,7 @@
 /*
  * THE CREATIVE LAB — Main Controller
  * A reusable showcase for interactive web concepts.
- * No birthday-specific or recipient-specific content.
+ * No occasion-specific or recipient-specific content.
  */
 
 const LAB_CONFIG = {

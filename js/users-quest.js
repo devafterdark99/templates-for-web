@@ -70,7 +70,7 @@
         "If you've made it this far, you've officially completed the Friendship Quest.\n\n" +
         "The best part of this adventure was never the XP, the badges or the treasure chest. It was all the ridiculous little moments that turned into stories worth keeping.\n\n" +
         "Here's to more adventures, more nonsense, more memories and more chapters that haven't been written yet.\n\n" +
-        "HAPPY BIRTHDAY, USER! 🏆\n\n" +
+        "Quest complete, User! 🏆\n\n" +
         "Quest status: LEGENDARY.\n" +
         "Friendship status: STILL IN PROGRESS. ♡";
 
@@ -222,14 +222,14 @@
         $("#treasureMapNode").textContent = treasureUnlocked ? "🏆" : "🔒";
         $("#treasureMapNode").setAttribute(
           "aria-label",
-          treasureUnlocked ? "Open the unlocked birthday treasure" : "Birthday treasure locked; complete all quests"
+          treasureUnlocked ? "Open the unlocked hidden treasure" : "Hidden treasure locked; complete all quests"
         );
 
         $("#treasureIcon").textContent = treasureUnlocked ? "🏆" : "🔒";
         $("#treasureButton").textContent = treasureUnlocked ? "OPEN THE TREASURE ✦" : "TREASURE LOCKED 🔒";
         $("#treasureDescription").textContent = treasureUnlocked
-          ? "All five checkpoints cleared. Your final birthday surprise is ready."
-          : "Five checkpoints stand between you and the birthday treasure. Complete the adventure to unlock the final surprise.";
+          ? "All five checkpoints cleared. Your final reward is ready."
+          : "Five checkpoints stand between you and the hidden treasure. Complete the adventure to unlock the final surprise.";
 
         if (count === quests.length) {
           $("#treasureButton").classList.add("treasure-ready");
@@ -243,7 +243,7 @@
           $("#completeQuest").textContent = "TREASURE REVEALED ✓";
           $("#completeQuest").disabled = true;
           confetti(120);
-          showToast("Legendary treasure unlocked. Happy Birthday, User! 🏆");
+          showToast("Legendary treasure unlocked. Quest complete, User! 🏆");
           return;
         }
 
