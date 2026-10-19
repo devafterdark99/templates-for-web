@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080d18">
-<meta name="description" content="ATHARVA.EXE — Atharva's personal birthday operating system.">
-<title>ATHARVA.EXE — Personal Desktop</title>
+<meta name="description" content="USER.EXE — User's personal birthday operating system.">
+<title>USER.EXE — Personal Desktop</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -260,7 +260,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 <body>
 <div class="boot" id="boot">
   <div class="boot-logo">A<span>✳</span></div>
-  <h2>ATHARVA.EXE</h2>
+  <h2>USER.EXE</h2>
   <p id="bootMessage">Preparing your personal universe…</p>
   <div class="boot-track"><span></span></div>
 </div>
@@ -272,7 +272,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
   <header class="menubar">
     <div class="menu-left">
       <button class="menu-logo" data-app="system" aria-label="System overview">✳</button>
-      <strong>ATHARVA.EXE</strong><span class="menu-divider"></span>
+      <strong>USER.EXE</strong><span class="menu-divider"></span>
       <button data-app="finder">Finder</button>
       <button data-app="about">About</button>
       <button data-app="settings">Settings</button>
@@ -286,7 +286,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 
   <section class="intro">
     <div class="kicker"><span class="live-dot"></span> PERSONAL EDITION / USER 001</div>
-    <h1>Hey,<br><span>Atharva.</span></h1>
+    <h1>Hey,<br><span>User.</span></h1>
     <p>Your desktop. Your rules. Questionable file management.</p>
     <div class="tags"><span>BUILD 26.12</span><span>ROOMMATE MODE: ON</span></div>
   </section>
@@ -302,7 +302,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 
   <aside class="widget profile-widget" id="profileWidget">
     <div class="widget-head"><span>USER PROFILE</span><span>● ACTIVE</span></div>
-    <div class="profile-main"><div class="avatar">A<span>✳</span></div><div><h2>Atharva</h2><p>Chief Chaos Officer</p></div></div>
+    <div class="profile-main"><div class="avatar">U<span>✳</span></div><div><h2>User</h2><p>Chief Chaos Officer</p></div></div>
     <div class="stats">
       <div><strong>∞</strong><small>CHAOS</small></div>
       <div><strong>99%</strong><small>VIBE</small></div>
@@ -339,7 +339,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
       <span class="dock-separator"></span>
       <button class="dock-app dock-power" id="powerButton" title="Power options">⏻</button>
     </div>
-    <div class="dock-caption">ATHARVA'S PERSONAL UNIVERSE · EST. 2026</div>
+    <div class="dock-caption">USER'S PERSONAL UNIVERSE · EST. 2026</div>
   </footer>
 
   <div class="context-menu" id="contextMenu">
@@ -368,7 +368,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
     <div class="logo">A<span>✳</span></div>
     <h2 id="shutdownTitle">Shutting down…</h2>
     <p id="shutdownMessage">Saving your questionable decisions.</p>
-    <button id="wakeButton">Boot ATHARVA.EXE again ↗</button>
+    <button id="wakeButton">Boot USER.EXE again ↗</button>
   </div>
 </main>
 
@@ -389,7 +389,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
       title:"System Overview",icon:"✳",color:"profile-icon",subtitle:"DEVICE HEALTH / OVERVIEW",
       body:()=>`
         <div class="hero-card">
-          <span class="window-kicker">ATHARVA.EXE // BUILD 26.12</span>
+          <span class="window-kicker">USER.EXE // BUILD 26.12</span>
           <h2>Everything is running.<br><span style="color:var(--cyan)">Mostly as intended.</span></h2>
           <p>Welcome to your own personal operating system. It has absolutely no practical purpose and an unreasonable amount of personality.</p>
         </div>
@@ -418,9 +418,9 @@ button:disabled{opacity:.4;cursor:not-allowed}
         </div>`
     },
     about: {
-      title:"About Atharva",icon:"◉",color:"profile-icon",subtitle:"USER PROFILE / CLASSIFIED",
+      title:"About User",icon:"◉",color:"profile-icon",subtitle:"USER PROFILE / CLASSIFIED",
       body:()=>`
-        <div class="hero-card"><span class="window-kicker">SUBJECT FILE: ATH-001</span><h2>Atharva.</h2><p>College friend since Semester 1. Current roommate. Full-time menace. A rare model that somehow passed quality control.</p></div>
+        <div class="hero-card"><span class="window-kicker">SUBJECT FILE: USR-001</span><h2>User.</h2><p>College friend since Semester 1. Current roommate. Full-time menace. A rare model that somehow passed quality control.</p></div>
         <div class="mini-grid">
           <div class="mini-card"><span>🧠</span><h3>Operating style</h3><p>Confidently improvises. Calls it a plan.</p></div>
           <div class="mini-card"><span>😂</span><h3>Primary function</h3><p>Making normal situations unnecessarily funny.</p></div>
@@ -495,7 +495,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
     const p=document.createElement("p");
     p.textContent=message;
     const small=document.createElement("small");
-    small.textContent="ATHARVA.EXE · JUST NOW";
+    small.textContent="USER.EXE · JUST NOW";
     toast.append(strong,p,small);
     stack.appendChild(toast);
     setTimeout(()=>{
@@ -692,7 +692,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
     powerOverlay.classList.remove("show");
     shutdownScreen.classList.add("show");
     $("#wakeButton").classList.remove("show");
-    $("#shutdownTitle").textContent=restart?"Restarting ATHARVA.EXE…":"Shutting down…";
+    $("#shutdownTitle").textContent=restart?"Restarting USER.EXE…":"Shutting down…";
     $("#shutdownMessage").textContent=restart?"Rebooting the chaos engine.":"Saving your questionable decisions.";
 
     setTimeout(()=>{
@@ -720,7 +720,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
     $(".boot").classList.remove("done");
     setTimeout(()=>{
       $(".boot").classList.add("done");
-      notify("System online","ATHARVA.EXE is back. Unfortunately for everyone.");
+      notify("System online","USER.EXE is back. Unfortunately for everyone.");
     },1700);
   });
 
@@ -743,7 +743,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 
   setTimeout(()=>{
     $(".boot").classList.add("done");
-    setTimeout(()=>notify("Welcome, Atharva","Your personal desktop is ready. Please pretend this is a real operating system."),500);
+    setTimeout(()=>notify("Welcome, User","Your personal desktop is ready. Please pretend this is a real operating system."),500);
   },1900);
 
   setTimeout(()=>notify("System tip","Right-click the desktop for quick actions."),5000);

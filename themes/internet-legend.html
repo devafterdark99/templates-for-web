@@ -1,48 +1,219 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#e9f0d9">
-  <meta name="description" content="A playful early-internet inspired birthday page with nostalgic UI, chaotic graphics and a guestbook.">
-  <title>Internet Legend '26 — The Birthday Lab</title>
-  <link rel="stylesheet" href="../css/theme-pages.css">
-  <script src="../js/theme-page.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11104b">
+  <meta name="description" content="Internet Legend '26 — an unhinged retro internet experience made for User.">
+  <title>Internet Legend '26 // The Birthday Lab</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/internet-legend.css">
 </head>
-<body class="internet" data-theme="internet">
-  <div class="theme-noise"></div>
-  <header class="theme-header">
-    <a class="theme-brand" href="../index.html"><span class="theme-brand-icon">✳</span><span>THE BIRTHDAY LAB<small>CONCEPT FILE / INTERNET</small></span></a>
-    <a class="back-link" href="../index.html">← ALL CONCEPTS</a>
-  </header>
-  <main class="theme-main" data-page="internet">
-    <section class="theme-hero">
-      <div class="theme-copy">
-        <p class="theme-kicker">WELCOME 2 THE INTERNET</p>
-        <h1>Born to scroll.<br><em>Built to troll.</em></h1>
-        <p class="theme-lede">A colourful retro-web playground full of memes, fake profile stats, stickers and pop-ups that absolutely did not need to exist.</p>
-        <button class="theme-cta" data-demo>GENERATE A VISITOR NUMBER <span>↗</span></button>
+
+<body>
+<header class="topbar">
+  <nav class="container nav">
+    <a class="brand" href="../index.html">
+      <span class="brand-icon">★</span>
+      <span class="brand-name">THE BIRTHDAY LAB<small>WELCOME TO THE INTERNET, 1999–2026</small></span>
+    </a>
+    <div class="nav-right">
+      <span class="online">YOU ARE ONLINE</span>
+      <a class="back-link" href="../index.html">← ARCHIVE</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="pill">★ INTERNET LEGEND // EST. 2026</div>
+        <h1>WELCOME<br>TO THE<br><span class="pink">USER</span><br><span class="cyan">VERSE_</span></h1>
+        <p>
+          You've entered a corner of the internet that definitely
+          <strong>should have been taken down by now.</strong>
+          Featuring one college legend, questionable decisions and
+          a lifetime supply of friendship lore.
+        </p>
+        <div class="actions">
+          <button class="btn btn-primary" id="enterInternet">ENTER THE INTERNET ↗</button>
+          <a class="btn btn-secondary" href="#sites">EXPLORE SITES ↓</a>
+        </div>
+        <div class="tiny-note">Best viewed with <span>✨ zero common sense ✨</span></div>
       </div>
-      <div class="theme-visual" aria-label="Internet Legend '26 concept visual">
-        <div class="retro-window"><div class="retro-window-bar"><i></i><i></i><i></i><span>atharva-world.exe</span></div><div class="retro-window-body"><small>WELCOME 2 THE INTERNET</small><strong>ATHARVA<br>WORLD!!</strong><span>★ CERTIFIED MENACE ★</span></div></div>
-        <div class="visual-footer"><span>THE BIRTHDAY LAB</span><span>CONCEPT 04 / 06</span></div>
+
+      <div class="browser" id="browser">
+        <div class="browser-titlebar">
+          <span>🌐 USER INTERNET EXPLORER</span>
+          <div class="window-controls"><i></i><i></i><i></i></div>
+        </div>
+        <div class="browser-toolbar">
+          <button class="tool-btn" id="browserBack" aria-label="Go back">←</button>
+          <button class="tool-btn" id="browserForward" aria-label="Go forward">→</button>
+          <button class="tool-btn" id="browserRefresh" aria-label="Refresh page">⟳</button>
+          <div class="address" id="address">https://user.is.a.legend/</div>
+        </div>
+        <div class="browser-content" id="browserContent">
+          <div class="browser-kicker">★ PERSONAL HOMEPAGE / 001 ★</div>
+          <div class="browser-heading">THE ONE.<br>THE ONLY.<br><span>USER!</span></div>
+          <div class="browser-description">Loading legendary content since first semester...</div>
+          <div class="pixel-art">
+            <div class="pixel-star">★</div>
+            <div class="pixel-star">✦</div>
+            <div class="pixel-star">♥</div>
+          </div>
+          <div class="browser-links">
+            <button class="browser-link" data-page="about">[ ABOUT THE LEGEND ]</button>
+            <button class="browser-link" data-page="awards">[ HALL OF FAME ]</button>
+            <button class="browser-link" data-page="memes">[ MEME DATABASE ]</button>
+            <button class="browser-link" data-page="secret">[ ??? SECRET ??? ]</button>
+          </div>
+        </div>
+        <div class="browser-status" id="browserStatus">DONE — 4 suspicious links detected.</div>
       </div>
-    </section>
-    <section class="theme-stat-row">
-      <div class="theme-stat"><small>VIBE</small><strong>UNHINGED</strong></div><div class="theme-stat"><small>MEME LEVEL</small><strong>DANGEROUS</strong></div><div class="theme-stat"><small>COOLNESS</small><strong>DEBATABLE</strong></div>
-    </section>
-    <section class="theme-section">
-      <div class="theme-section-heading"><div><p class="theme-kicker">WHAT THIS UNIVERSE COULD INCLUDE</p><h2>The experience.</h2></div><p>Concept preview only.<br>The full birthday build comes later.</p></div>
-      <div class="feature-grid">
-        <article class="feature-card"><span class="feature-num">01 / FEATURE</span><h3>FAKE PROFILE</h3><p>A wildly inaccurate but affectionate internet profile.</p></article><article class="feature-card"><span class="feature-num">02 / FEATURE</span><h3>MEME MACHINE</h3><p>Inside jokes turned into shareable meme-style cards.</p></article><article class="feature-card"><span class="feature-num">03 / FEATURE</span><h3>GUESTBOOK</h3><p>A tiny retro guestbook with silly messages and reactions.</p></article>
+    </div>
+  </section>
+
+  <div class="marquee" aria-label="Retro internet ticker">
+    <div class="marquee-track">
+      <span>★ <b>WELCOME</b> TO THE USER INTERNET ★</span>
+      <span>UNDER CONSTRUCTION SINCE FOREVER 🚧</span>
+      <span>100% FRIENDSHIP-POWERED CONTENT ♥</span>
+      <span>NO ADS, JUST NONSENSE ★</span>
+      <span>★ <b>WELCOME</b> TO THE USER INTERNET ★</span>
+      <span>UNDER CONSTRUCTION SINCE FOREVER 🚧</span>
+      <span>100% FRIENDSHIP-POWERED CONTENT ♥</span>
+      <span>NO ADS, JUST NONSENSE ★</span>
+    </div>
+  </div>
+
+  <section class="container section reveal">
+    <div class="stats">
+      <div class="stat"><div class="stat-label">LEGEND STATUS</div><div class="stat-value">100%</div><div class="stat-note">Certified icon</div></div>
+      <div class="stat"><div class="stat-label">CHAOS POINTS</div><div class="stat-value">999+</div><div class="stat-note">Limit exceeded</div></div>
+      <div class="stat"><div class="stat-label">FRIENDSHIP XP</div><div class="stat-value">MAX</div><div class="stat-note">No respawns needed</div></div>
+      <div class="stat"><div class="stat-label">BIRTHDAY PATCH</div><div class="stat-value">10 DEC</div><div class="stat-note">Update incoming</div></div>
+    </div>
+  </section>
+
+  <section class="container section reveal" id="sites">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">/// BOOKMARKS / PERSONAL INTERNET</div>
+        <h2 class="section-title">Explore the <em>websites.</em></h2>
       </div>
-    </section>
-    <section class="demo-panel">
-      <div><h2>You are visitor #000001.</h2><p>A full version could include a fake visitor counter, interactive stickers, meme cards and a guestbook.</p></div>
-      <button class="demo-button" data-demo>GENERATE A VISITOR NUMBER ↗</button>
-    </section>
-  </main>
-  <footer class="theme-footer"><span>THE BIRTHDAY LAB © 2026</span><a href="../index.html">BACK TO THE CONCEPT ARCHIVE ↗</a></footer>
-  <dialog class="theme-dialog" id="themeDemo"><p class="theme-kicker">INTERACTIVE CONCEPT PREVIEW</p><h2 id="demoTitle">Nice.</h2><p id="demoText">This is a concept preview.</p><button id="closeDemo">GOT IT</button></dialog>
+      <p class="section-description">Every link leads somewhere. Some contain facts. Others contain absolute nonsense. Choose wisely.</p>
+    </div>
+
+    <div class="site-grid">
+      <button class="site-card" data-page="about">
+        <div class="site-card-top"><span>ABOUT.HTML</span><span class="site-dots">● ● ●</span></div>
+        <div class="site-card-body"><div class="site-emoji">🧍</div><h3>The Legend Wiki</h3><p>A very serious biography of a very unserious individual. Facts may be exaggerated for dramatic effect.</p></div>
+        <div class="site-card-bottom">CLICK TO VISIT →</div>
+      </button>
+
+      <button class="site-card" data-page="awards">
+        <div class="site-card-top"><span>AWARDS.EXE</span><span class="site-dots">● ● ●</span></div>
+        <div class="site-card-body"><div class="site-emoji">🏆</div><h3>Hall of Fame</h3><p>Prestigious awards for extraordinary achievements in the highly competitive field of being User.</p></div>
+        <div class="site-card-bottom">CLICK TO VISIT →</div>
+      </button>
+
+      <button class="site-card" data-page="memes">
+        <div class="site-card-top"><span>MEMES.ZIP</span><span class="site-dots">● ● ●</span></div>
+        <div class="site-card-body"><div class="site-emoji">🗂️</div><h3>Meme Database</h3><p>Restricted files from the shared humour archive. Side effects include uncontrollable laughing.</p></div>
+        <div class="site-card-bottom">CLICK TO VISIT →</div>
+      </button>
+
+      <button class="site-card" data-page="secret">
+        <div class="site-card-top"><span>???/SECRET</span><span class="site-dots">● ● ●</span></div>
+        <div class="site-card-body"><div class="site-emoji">🔐</div><h3>Secret Internet</h3><p>A suspicious link with absolutely no explanation. Clicking it is entirely your responsibility.</p></div>
+        <div class="site-card-bottom">CLICK IF YOU DARE →</div>
+      </button>
+
+      <button class="site-card" data-page="guestbook">
+        <div class="site-card-top"><span>GUESTBOOK.TXT</span><span class="site-dots">● ● ●</span></div>
+        <div class="site-card-body"><div class="site-emoji">💌</div><h3>Guestbook</h3><p>Leave a message for the legend. Your entry will appear right here on this page.</p></div>
+        <div class="site-card-bottom">SIGN THE GUESTBOOK →</div>
+      </button>
+
+      <button class="site-card" data-page="error">
+        <div class="site-card-top"><span>ERROR_404.HTML</span><span class="site-dots">● ● ●</span></div>
+        <div class="site-card-body"><div class="site-emoji">💥</div><h3>Definitely Broken</h3><p>This website has been reported for excessive levels of nonsense. See the damage yourself.</p></div>
+        <div class="site-card-bottom">BREAK THE INTERNET →</div>
+      </button>
+    </div>
+  </section>
+
+  <section class="container section reveal" id="guestbook">
+    <div class="guestbook">
+      <div class="guestbook-intro">
+        <div class="section-kicker">/// SIGN HERE / NO PAPER REQUIRED</div>
+        <h3>YOU'VE BEEN A PART OF THE INTERNET.</h3>
+        <p>Leave your official entry in User's legendary guestbook. The message appears instantly in this browser session. Refreshing the page clears the demo entries.</p>
+        <p style="color:var(--lime);font-family:var(--terminal);font-size:20px">Current visitors: you + the legend ✦</p>
+      </div>
+
+      <form class="guestbook-form" id="guestbookForm">
+        <div class="field">
+          <label for="guestName">YOUR INTERNET ALIAS</label>
+          <input id="guestName" name="name" maxlength="30" placeholder="e.g. certified bhondu" required>
+        </div>
+        <div class="field">
+          <label for="guestMessage">LEAVE A MESSAGE</label>
+          <textarea id="guestMessage" name="message" maxlength="220" placeholder="Write something legendary..." required></textarea>
+        </div>
+        <button class="btn" type="submit">SIGN THE GUESTBOOK ★</button>
+        <div class="guestbook-list" id="guestbookList" aria-live="polite">
+          <div class="guest-empty">No messages yet. Be the first legend to sign.</div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="container reveal">
+    <div class="final-panel">
+      <div>
+        <div class="section-kicker">/// END OF THE WORLD WIDE WEB</div>
+        <h2>YOU MADE IT.<br><span>YOU SURVIVED.</span></h2>
+        <p>Thanks for visiting the most questionable corner of the internet. This is only the concept preview. The final birthday version can contain real photos, personal jokes, a custom timeline and an extra-secret message for User.</p>
+      </div>
+      <button class="btn btn-primary" id="surpriseButton">ONE LAST CLICK ✦</button>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>THE BIRTHDAY LAB © 2026</span>
+    <span>INTERNET LEGEND <b>★</b> CONCEPT 04 / 06</span>
+    <a href="../index.html">BACK TO CONCEPT ARCHIVE ↑</a>
+  </div>
+</footer>
+
+<dialog class="dialog" id="siteDialog">
+  <div class="dialog-head">
+    <span id="dialogLabel">WEBSITE / LOADING</span>
+    <button class="dialog-close" data-close>✕</button>
+  </div>
+  <div class="dialog-content">
+    <div class="section-kicker" id="dialogKicker">WELCOME TO THE INTERNET</div>
+    <h2 id="dialogTitle">HELLO, LEGEND.</h2>
+    <p id="dialogText">Your page has loaded successfully.</p>
+    <div class="dialog-actions">
+      <button class="btn btn-primary" id="dialogAction">COOL, CONTINUE →</button>
+      <button class="btn btn-secondary" data-close>CLOSE WINDOW</button>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../js/internet-legend.js" defer></script>
 </body>
 </html>

@@ -17,7 +17,7 @@ const demos = {
   },
   awards: {
     title: "AND THE AWARD GOES TO…",
-    text: "The award for Most Likely to Be Roasted on His Birthday goes to… ATHARVA! Please hold your acceptance speech."
+    text: "The award for Most Likely to Be Roasted on His Birthday goes to… USER! Please hold your acceptance speech."
   },
   quest: {
     title: "SIDE QUEST UNLOCKED",
