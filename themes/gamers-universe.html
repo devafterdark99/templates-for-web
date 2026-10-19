@@ -3,46 +3,1964 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#100d27">
-  <meta name="description" content="An arcade-inspired birthday experience with pixel energy, playful challenges and collectible surprises.">
+  <meta name="theme-color" content="#080b18">
+  <meta name="description" content="The Gamer's Universe — a playable arcade birthday adventure for Atharva.">
   <title>The Gamer's Universe — The Birthday Lab</title>
-  <link rel="stylesheet" href="../css/theme-pages.css">
-  <script src="../js/theme-page.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #080b18;
+      --panel: #10162b;
+      --panel2: #151d35;
+      --line: #2a3658;
+      --cyan: #45f6e8;
+      --pink: #ff4d9d;
+      --yellow: #ffe66d;
+      --purple: #9b7bff;
+      --green: #83ff9b;
+      --white: #f2f5ff;
+      --muted: #8794b8;
+      --pixel: "Press Start 2P", monospace;
+      --body: "Space Grotesk", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at 50% -15%, #24245a 0%, transparent 50%),
+        radial-gradient(ellipse at 100% 35%, #192448 0%, transparent 40%),
+        var(--bg);
+      color: var(--white);
+      font-family: var(--body);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 20;
+      opacity: .12;
+      background: repeating-linear-gradient(
+        transparent 0 3px,
+        rgba(0, 0, 0, .22) 3px 4px
+      );
+    }
+
+    button, a { font: inherit; }
+    button { color: inherit; }
+
+    button:focus-visible, a:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    button:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page-shell {
+      width: min(1450px, 100%);
+      padding: 0 34px;
+      margin: auto;
+    }
+
+    .topbar {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid rgba(111, 134, 195, .2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      color: var(--bg);
+      background: var(--cyan);
+      font-size: 22px;
+      box-shadow: 4px 4px 0 #226f83;
+    }
+
+    .brand small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-family: var(--pixel);
+      font-size: 7px;
+      letter-spacing: 0;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .server-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px var(--green);
+      animation: blink 1.4s infinite;
+    }
+
+    .back-link {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      transition: color .2s;
+    }
+
+    .back-link:hover { color: var(--cyan); }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-family: var(--pixel);
+      font-size: 9px;
+      line-height: 1.9;
+      letter-spacing: 1px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr .85fr;
+      align-items: center;
+      gap: 55px;
+      padding: 65px 0 45px;
+    }
+
+    .hero-copy { max-width: 650px; }
+
+    .hero h1 {
+      margin: 24px 0 20px;
+      font-size: clamp(48px, 6vw, 84px);
+      line-height: .96;
+      letter-spacing: -5px;
+      font-weight: 700;
+    }
+
+    .hero h1 .highlight {
+      color: var(--cyan);
+      text-shadow: 0 0 28px rgba(69, 246, 232, .32);
+    }
+
+    .hero-description {
+      max-width: 510px;
+      color: #aab4d2;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      min-height: 49px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 0 21px;
+      border: 1px solid var(--line);
+      background: #151c33;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+
+    .btn:hover:not(:disabled) {
+      transform: translateY(-3px);
+      border-color: var(--cyan);
+    }
+
+    .btn-primary {
+      color: #06131c;
+      background: var(--cyan);
+      border-color: var(--cyan);
+      box-shadow: 4px 4px 0 #236e83;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      box-shadow: 0 0 25px rgba(69, 246, 232, .28);
+    }
+
+    .btn-pink {
+      color: var(--pink);
+      border-color: rgba(255, 77, 157, .4);
+    }
+
+    .pixel-art {
+      position: relative;
+      min-height: 360px;
+      overflow: hidden;
+      border: 1px solid #29375b;
+      background:
+        radial-gradient(ellipse at 50% 90%, rgba(73, 53, 170, .35), transparent 50%),
+        linear-gradient(180deg, #11182e 0%, #1d2350 68%, #10152b 100%);
+      box-shadow: 0 0 70px rgba(76, 71, 201, .12), inset 0 0 60px rgba(0,0,0,.25);
+      isolation: isolate;
+    }
+
+    .pixel-art::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .24;
+      background-image:
+        linear-gradient(rgba(124, 149, 221, .2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 149, 221, .2) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    .pixel-art::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 75px;
+      background: repeating-linear-gradient(90deg, #101a37 0 28px, #152042 28px 56px);
+      border-top: 4px solid #45f6e8;
+      box-shadow: 0 -8px 30px rgba(69,246,232,.13);
+    }
+
+    .pixel-moon {
+      position: absolute;
+      top: 36px;
+      right: 48px;
+      width: 55px;
+      height: 55px;
+      background: var(--yellow);
+      box-shadow: 0 0 40px rgba(255,230,109,.28);
+      clip-path: polygon(25% 0, 75% 0, 75% 12%, 88% 12%, 88% 25%, 100% 25%, 100% 75%, 88% 75%, 88% 88%, 75% 88%, 75% 100%, 25% 100%, 25% 88%, 12% 88%, 12% 75%, 0 75%, 0 25%, 12% 25%, 12% 12%, 25% 12%);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .star {
+      position: absolute;
+      color: var(--white);
+      font-size: 14px;
+      animation: twinkle 2.2s infinite alternate;
+    }
+
+    .mountain {
+      position: absolute;
+      bottom: 65px;
+      width: 270px;
+      height: 210px;
+      background: #282d68;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    .mountain.one { left: -40px; }
+    .mountain.two {
+      right: -50px;
+      height: 160px;
+      background: #22275a;
+    }
+
+    .platform {
+      position: absolute;
+      z-index: 3;
+      left: 0;
+      right: 0;
+      bottom: 70px;
+      height: 12px;
+      background: var(--cyan);
+      box-shadow: 0 0 25px rgba(69,246,232,.6);
+    }
+
+    .pixel-player {
+      position: absolute;
+      z-index: 4;
+      left: 43%;
+      bottom: 82px;
+      width: 42px;
+      height: 51px;
+      background: var(--pink);
+      box-shadow: inset -8px -8px 0 #bc2c76, 0 0 22px rgba(255,77,157,.35);
+      animation: player-hop 1.7s ease-in-out infinite;
+    }
+
+    .pixel-player::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 8px;
+      width: 7px;
+      height: 7px;
+      background: white;
+      box-shadow: 16px 0 white, 4px 3px 0 #18203c, 20px 3px 0 #18203c;
+    }
+
+    .pixel-player::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      bottom: -8px;
+      width: 12px;
+      height: 8px;
+      background: var(--yellow);
+      box-shadow: 20px 0 var(--yellow);
+    }
+
+    .pixel-coin {
+      position: absolute;
+      z-index: 3;
+      bottom: 135px;
+      width: 23px;
+      height: 23px;
+      background: var(--yellow);
+      border: 5px solid #f7bd4a;
+      box-shadow: 0 0 17px rgba(255,230,109,.35);
+      animation: coin-float 1.3s ease-in-out infinite alternate;
+    }
+
+    .pixel-coin.c1 { left: 25%; }
+    .pixel-coin.c2 { left: 68%; animation-delay: .4s; }
+    .pixel-coin.c3 { left: 82%; animation-delay: .8s; }
+
+    .visual-hud {
+      position: absolute;
+      z-index: 5;
+      top: 18px;
+      left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-family: var(--pixel);
+      font-size: 8px;
+      line-height: 1.8;
+    }
+
+    .hud-label { color: var(--cyan); }
+    .hud-value { color: white; }
+
+    .visual-tag {
+      position: absolute;
+      z-index: 5;
+      right: 15px;
+      bottom: 15px;
+      font-family: var(--pixel);
+      color: var(--cyan);
+      font-size: 7px;
+    }
+
+    .ticker {
+      overflow: hidden;
+      border-top: 1px solid #263354;
+      border-bottom: 1px solid #263354;
+      background: rgba(14, 20, 41, .8);
+    }
+
+    .ticker-track {
+      width: max-content;
+      display: flex;
+      gap: 35px;
+      padding: 13px 0;
+      animation: ticker 24s linear infinite;
+      color: #a8b4d3;
+      font-family: var(--pixel);
+      font-size: 8px;
+    }
+
+    .ticker-track span:nth-child(odd) { color: var(--cyan); }
+
+    .game-section { padding: 65px 0 30px; }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+      margin: 13px 0 0;
+      font-size: clamp(25px, 4vw, 38px);
+      letter-spacing: -1.5px;
+    }
+
+    .section-heading p {
+      margin: 0;
+      max-width: 360px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .game-shell {
+      overflow: hidden;
+      border: 1px solid #344367;
+      background: #0d1328;
+      box-shadow: 0 25px 90px rgba(0,0,0,.25);
+    }
+
+    .game-topline {
+      min-height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 19px;
+      border-bottom: 1px solid #2b3657;
+      background: #121a32;
+    }
+
+    .game-name {
+      font-family: var(--pixel);
+      font-size: 9px;
+      line-height: 1.8;
+    }
+
+    .game-name span { color: var(--cyan); }
+
+    .game-level {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .game-stage {
+      position: relative;
+      background: #111735;
+    }
+
+    #gameCanvas {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      min-height: 260px;
+      max-height: 480px;
+      image-rendering: pixelated;
+      touch-action: none;
+    }
+
+    .game-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(5, 8, 22, .78);
+      backdrop-filter: blur(5px);
+      transition: opacity .25s, visibility .25s;
+    }
+
+    .game-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .overlay-card {
+      width: min(460px, 100%);
+      padding: 29px 24px;
+      text-align: center;
+      border: 1px solid #485a8b;
+      background: rgba(15, 23, 48, .97);
+      box-shadow: 0 0 60px rgba(69,246,232,.08);
+    }
+
+    .overlay-icon {
+      margin-bottom: 17px;
+      font-size: 39px;
+      filter: drop-shadow(0 0 18px rgba(69,246,232,.25));
+    }
+
+    .overlay-card h3 {
+      margin: 0 0 13px;
+      color: var(--cyan);
+      font-family: var(--pixel);
+      font-size: clamp(12px, 2vw, 17px);
+      line-height: 1.8;
+    }
+
+    .overlay-card p {
+      color: #aab6d6;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .overlay-card .btn { margin-top: 12px; }
+
+    .game-hud {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid #2b3657;
+      border-bottom: 1px solid #2b3657;
+      background: #10172e;
+    }
+
+    .hud-stat {
+      padding: 16px 18px;
+      border-right: 1px solid #2b3657;
+    }
+
+    .hud-stat:last-child { border-right: 0; }
+
+    .hud-stat small {
+      display: block;
+      color: var(--muted);
+      font-family: var(--pixel);
+      font-size: 7px;
+      line-height: 1.8;
+    }
+
+    .hud-stat strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 23px;
+      font-weight: 700;
+    }
+
+    .hud-stat strong.cyan { color: var(--cyan); }
+    .hud-stat strong.yellow { color: var(--yellow); }
+    .hud-stat strong.pink { color: var(--pink); }
+
+    .game-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 15px 18px;
+    }
+
+    .controls-copy {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    kbd {
+      padding: 4px 7px;
+      border: 1px solid #394769;
+      border-bottom-width: 3px;
+      border-radius: 3px;
+      color: var(--white);
+      background: #1b2542;
+      font-family: var(--body);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .game-action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .game-action-buttons .btn {
+      min-height: 38px;
+      padding: 0 12px;
+      font-size: 10px;
+    }
+
+    .touch-controls {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 13px;
+      border-top: 1px solid #2b3657;
+      background: #0b1125;
+    }
+
+    .touch-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .touch-btn {
+      width: 54px;
+      height: 48px;
+      border: 1px solid #394769;
+      background: #182442;
+      font-size: 20px;
+      touch-action: none;
+      user-select: none;
+    }
+
+    .touch-btn:active {
+      color: var(--cyan);
+      border-color: var(--cyan);
+      background: #253456;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr 1fr;
+      gap: 17px;
+      padding: 50px 0 35px;
+    }
+
+    .dash-card {
+      position: relative;
+      overflow: hidden;
+      padding: 23px;
+      border: 1px solid #2b3657;
+      background: linear-gradient(145deg, rgba(21,29,54,.94), rgba(12,17,35,.94));
+      transition: transform .25s, border-color .25s;
+    }
+
+    .dash-card:hover {
+      transform: translateY(-5px);
+      border-color: #52668e;
+    }
+
+    .dash-card::after {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      right: -35px;
+      bottom: -35px;
+      border: 15px solid rgba(69,246,232,.04);
+      transform: rotate(45deg);
+      pointer-events: none;
+    }
+
+    .dash-icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border: 1px solid #35456a;
+      background: #1b2543;
+      font-size: 21px;
+    }
+
+    .dash-card h3 {
+      margin: 0 0 11px;
+      font-size: 17px;
+    }
+
+    .dash-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .dash-link {
+      display: inline-block;
+      margin-top: 19px;
+      padding: 0;
+      border: 0;
+      color: var(--cyan);
+      background: transparent;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .profile-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 19px;
+    }
+
+    .mini-stat {
+      padding: 12px;
+      background: #0d1429;
+      border: 1px solid #263454;
+    }
+
+    .mini-stat small {
+      display: block;
+      color: var(--muted);
+      font-family: var(--pixel);
+      font-size: 7px;
+    }
+
+    .mini-stat strong {
+      display: block;
+      margin-top: 10px;
+      color: var(--yellow);
+      font-size: 21px;
+    }
+
+    .quest-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 19px;
+    }
+
+    .quest-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .quest-check {
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid #344465;
+      color: var(--green);
+      background: #131f32;
+    }
+
+    .quest-row small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .boss-section {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 25px;
+      overflow: hidden;
+      margin: 12px 0 75px;
+      padding: 35px;
+      border: 1px solid rgba(255,77,157,.4);
+      background:
+        radial-gradient(ellipse at 100% 50%, rgba(255,77,157,.15), transparent 50%),
+        linear-gradient(120deg, #19172e, #151127);
+    }
+
+    .boss-section .eyebrow { color: var(--pink); }
+
+    .boss-section h2 {
+      margin: 13px 0;
+      font-size: clamp(24px, 4vw, 37px);
+      letter-spacing: -1px;
+    }
+
+    .boss-section p {
+      max-width: 650px;
+      margin: 0;
+      color: #b1b6d0;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .boss-art {
+      width: 100px;
+      height: 100px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--pink);
+      color: var(--pink);
+      background: rgba(255,77,157,.08);
+      font-size: 48px;
+      box-shadow: 0 0 40px rgba(255,77,157,.1), inset 0 0 25px rgba(255,77,157,.08);
+      animation: boss-pulse 2.5s infinite;
+    }
+
+    .boss-health {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .boss-health span {
+      color: var(--pink);
+      font-family: var(--pixel);
+      font-size: 7px;
+      white-space: nowrap;
+    }
+
+    .health-bar {
+      width: min(300px, 50%);
+      height: 8px;
+      background: #3a1e3a;
+    }
+
+    .health-bar span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: var(--pink);
+      box-shadow: 0 0 10px rgba(255,77,157,.5);
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 23px 0 28px;
+      border-top: 1px solid #25304e;
+      color: var(--muted);
+      font-family: var(--pixel);
+      font-size: 7px;
+      line-height: 2;
+    }
+
+    .footer a { color: var(--cyan); }
+
+    .toast {
+      position: fixed;
+      z-index: 50;
+      right: 22px;
+      bottom: 22px;
+      max-width: min(340px, calc(100vw - 44px));
+      padding: 15px 18px;
+      border: 1px solid var(--cyan);
+      background: #111a30;
+      box-shadow: 0 10px 40px rgba(0,0,0,.4), 0 0 25px rgba(69,246,232,.08);
+      font-size: 12px;
+      line-height: 1.7;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: opacity .25s, transform .25s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--cyan);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(3,5,15,.8);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal[hidden] { display: none; }
+
+    .modal-card {
+      width: min(520px, 100%);
+      padding: 28px;
+      border: 1px solid #40527a;
+      background: #10172e;
+      box-shadow: 0 0 70px rgba(69,246,232,.08);
+    }
+
+    .modal-card h2 {
+      margin: 12px 0;
+      font-size: 28px;
+    }
+
+    .modal-card p {
+      color: #aab6d6;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .achievement {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin: 19px 0;
+      padding: 15px;
+      border: 1px solid #304263;
+      background: #151f3a;
+    }
+
+    .achievement-icon { font-size: 30px; }
+
+    .achievement strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .achievement small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    @keyframes blink { 50% { opacity: .35; } }
+    @keyframes float { 50% { transform: translateY(-9px); } }
+    @keyframes twinkle { to { opacity: .35; transform: scale(.8); } }
+    @keyframes player-hop { 50% { transform: translateY(-13px); } }
+    @keyframes coin-float { to { transform: translateY(-9px); } }
+    @keyframes boss-pulse {
+      50% { box-shadow: 0 0 55px rgba(255,77,157,.28), inset 0 0 30px rgba(255,77,157,.12); }
+    }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+
+    @media (max-width: 950px) {
+      .hero { grid-template-columns: 1fr; gap: 35px; }
+      .hero-copy { max-width: 750px; }
+      .pixel-art { min-height: 330px; }
+      .dashboard { grid-template-columns: 1fr 1fr; }
+      .dashboard .dash-card:first-child { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 600px) {
+      .page-shell { padding: 0 17px; }
+      .topbar { height: 68px; }
+      .brand { gap: 9px; font-size: 10px; letter-spacing: 1px; }
+      .brand-icon { width: 32px; height: 32px; }
+      .brand small { font-size: 6px; }
+      .topbar-right { gap: 10px; }
+      .server-status { font-size: 0; }
+      .server-status .status-dot { width: 8px; height: 8px; }
+      .back-link { font-size: 10px; }
+      .hero { padding: 43px 0 32px; }
+      .hero h1 { font-size: clamp(46px, 13vw, 66px); letter-spacing: -3px; }
+      .hero-description { font-size: 14px; }
+      .eyebrow { font-size: 8px; }
+      .pixel-art { min-height: 280px; }
+      .game-section { padding-top: 48px; }
+      .section-heading { align-items: start; flex-direction: column; }
+      .section-heading p { font-size: 12px; }
+      .game-topline { align-items: start; flex-direction: column; }
+      #gameCanvas { aspect-ratio: 4 / 3; min-height: 270px; }
+      .game-hud { grid-template-columns: 1fr 1fr; }
+      .hud-stat:nth-child(2) { border-right: 0; }
+      .hud-stat:nth-child(-n+2) { border-bottom: 1px solid #2b3657; }
+      .game-controls { align-items: start; flex-direction: column; }
+      .touch-controls { display: flex; }
+      .dashboard { grid-template-columns: 1fr; padding-top: 30px; }
+      .dashboard .dash-card:first-child { grid-column: auto; }
+      .boss-section { grid-template-columns: 1fr; padding: 24px; }
+      .boss-art { width: 74px; height: 74px; font-size: 34px; }
+      .footer { align-items: start; flex-direction: column; gap: 6px; }
+      .overlay-card { padding: 23px 16px; }
+      .overlay-card h3 { font-size: 11px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
-<body class="gamer" data-theme="gamer">
-  <div class="theme-noise"></div>
-  <header class="theme-header">
-    <a class="theme-brand" href="../index.html"><span class="theme-brand-icon">✳</span><span>THE BIRTHDAY LAB<small>CONCEPT FILE / GAMER</small></span></a>
-    <a class="back-link" href="../index.html">← ALL CONCEPTS</a>
+
+<body>
+  <header class="topbar page-shell">
+    <a class="brand" href="../index.html">
+      <span class="brand-icon">✳</span>
+      <span>THE BIRTHDAY LAB<small>CONCEPT FILE / PLAYER 01</small></span>
+    </a>
+    <div class="topbar-right">
+      <span class="server-status"><span class="status-dot"></span> ARCADE ONLINE</span>
+      <a class="back-link" href="../index.html">← ALL CONCEPTS</a>
+    </div>
   </header>
-  <main class="theme-main" data-page="gamer">
-    <section class="theme-hero">
-      <div class="theme-copy">
-        <p class="theme-kicker">PLAYER ONE / BIRTHDAY MODE</p>
-        <h1>A new game.<br><em>Your rules.</em></h1>
-        <p class="theme-lede">Welcome to a birthday built like an arcade adventure. Earn XP, unlock memories, beat ridiculous challenges and make it to the final boss.</p>
-        <button class="theme-cta" data-demo>TEST THE START BUTTON <span>↗</span></button>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">PLAYER ONE / BIRTHDAY MODE</p>
+        <h1>INSERT COIN.<br><span class="highlight">BECOME</span><br>LEGENDARY.</h1>
+        <p class="hero-description">
+          Welcome to Atharva's universe. A custom arcade adventure packed with
+          quests, ridiculous roommate lore, collectible memories and one very
+          suspicious final boss. Ready, player one?
+        </p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" id="heroStart">▶ PLAY THE GAME</button>
+          <button class="btn" id="howToPlay">⌘ HOW TO PLAY</button>
+        </div>
       </div>
-      <div class="theme-visual" aria-label="The Gamer's Universe concept visual">
-        <span class="pixel-moon">✦</span><div class="pixel-hero-mountain"></div><div class="pixel-hero-mountain two"></div><div class="pixel-platform"></div><div class="pixel-hero-player">A</div>
-        <div class="visual-footer"><span>THE BIRTHDAY LAB</span><span>CONCEPT 01 / 06</span></div>
+
+      <div class="pixel-art" aria-label="Animated pixel-art arcade landscape">
+        <span class="pixel-moon"></span>
+        <span class="star" style="top:25%;left:24%">✦</span>
+        <span class="star" style="top:47%;left:76%;animation-delay:.7s">✧</span>
+        <span class="star" style="top:22%;left:57%;animation-delay:1.2s">✦</span>
+        <span class="star" style="top:61%;left:12%;animation-delay:.3s">·</span>
+        <div class="mountain one"></div>
+        <div class="mountain two"></div>
+        <span class="pixel-coin c1"></span>
+        <span class="pixel-coin c2"></span>
+        <span class="pixel-coin c3"></span>
+        <div class="platform"></div>
+        <div class="pixel-player"></div>
+        <div class="visual-hud">
+          <span class="hud-label">PLAYER</span>
+          <span class="hud-value">ATHARVA.EXE</span>
+          <span class="hud-label" style="margin-top:8px">MISSION</span>
+          <span class="hud-value">BIRTHDAY RUN</span>
+        </div>
+        <div class="visual-tag">WORLD 01 / THE BEGINNING</div>
       </div>
-    </section>
-    <section class="theme-stat-row">
-      <div class="theme-stat"><small>GAME MODE</small><strong>ADVENTURE</strong></div><div class="theme-stat"><small>DIFFICULTY</small><strong>FRIENDSHIP</strong></div><div class="theme-stat"><small>FINAL BOSS</small><strong>BIRTHDAY</strong></div>
-    </section>
-    <section class="theme-section">
-      <div class="theme-section-heading"><div><p class="theme-kicker">WHAT THIS UNIVERSE COULD INCLUDE</p><h2>The experience.</h2></div><p>Concept preview only.<br>The full birthday build comes later.</p></div>
-      <div class="feature-grid">
-        <article class="feature-card"><span class="feature-num">01 / FEATURE</span><h3>PLAYER PROFILE</h3><p>A custom player card with stats that are deeply unserious.</p></article><article class="feature-card"><span class="feature-num">02 / FEATURE</span><h3>UNLOCKABLE LEVELS</h3><p>College memories become stages, quests and bonus rounds.</p></article><article class="feature-card"><span class="feature-num">03 / FEATURE</span><h3>BOSS BATTLE</h3><p>A final birthday challenge with a reward at the end.</p></article>
-      </div>
-    </section>
-    <section class="demo-panel">
-      <div><h2>Press start, legend.</h2><p>This concept could include a tiny playable mini-game, hidden collectibles and a final birthday level.</p></div>
-      <button class="demo-button" data-demo>TEST THE START BUTTON ↗</button>
     </section>
   </main>
-  <footer class="theme-footer"><span>THE BIRTHDAY LAB © 2026</span><a href="../index.html">BACK TO THE CONCEPT ARCHIVE ↗</a></footer>
-  <dialog class="theme-dialog" id="themeDemo"><p class="theme-kicker">INTERACTIVE CONCEPT PREVIEW</p><h2 id="demoTitle">Nice.</h2><p id="demoText">This is a concept preview.</p><button id="closeDemo">GOT IT</button></dialog>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>PLAYER ONE</span> ✦ <span>INSERT COIN</span> ✦
+      <span>COLLECT XP</span> ✦ <span>UNLOCK MEMORIES</span> ✦
+      <span>NO SAVE POINTS FOR BAD DECISIONS</span> ✦
+      <span>PLAYER ONE</span> ✦ <span>INSERT COIN</span> ✦
+      <span>COLLECT XP</span> ✦ <span>UNLOCK MEMORIES</span> ✦
+      <span>NO SAVE POINTS FOR BAD DECISIONS</span> ✦
+    </div>
+  </div>
+
+  <main class="page-shell">
+    <section class="game-section" id="arcade">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">01 / LIVE ARCADE</p>
+          <h2>Your first mission awaits.</h2>
+        </div>
+        <p>A tiny playable platformer. Grab the coins, dodge the spikes and reach the portal. Don't rage quit, bro.</p>
+      </div>
+
+      <div class="game-shell">
+        <div class="game-topline">
+          <div class="game-name">PIXEL RUNNER <span>///</span> BIRTHDAY EDITION</div>
+          <div class="game-level" id="levelLabel">WORLD 01 · THE NEON VALLEY</div>
+        </div>
+
+        <div class="game-stage">
+          <canvas id="gameCanvas" width="960" height="420" aria-label="Pixel Runner platform game"></canvas>
+
+          <div class="game-overlay" id="gameOverlay">
+            <div class="overlay-card">
+              <div class="overlay-icon" id="overlayIcon">🎮</div>
+              <h3 id="overlayTitle">READY, PLAYER ONE?</h3>
+              <p id="overlayText">Collect coins, jump over danger and make it to the glowing portal. Your roommate reputation depends on it.</p>
+              <button class="btn btn-primary" id="overlayStart">▶ START GAME</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-hud">
+          <div class="hud-stat">
+            <small>SCORE</small>
+            <strong class="cyan" id="scoreValue">0000</strong>
+          </div>
+          <div class="hud-stat">
+            <small>COINS</small>
+            <strong class="yellow" id="coinValue">0 / 8</strong>
+          </div>
+          <div class="hud-stat">
+            <small>LIVES</small>
+            <strong class="pink" id="livesValue">♥ ♥ ♥</strong>
+          </div>
+          <div class="hud-stat">
+            <small>XP EARNED</small>
+            <strong id="xpValue">000 XP</strong>
+          </div>
+        </div>
+
+        <div class="game-controls">
+          <div class="controls-copy">
+            MOVE <kbd>A</kbd> <kbd>D</kbd> or <kbd>←</kbd> <kbd>→</kbd>
+            &nbsp; JUMP <kbd>SPACE</kbd> / <kbd>W</kbd> / <kbd>↑</kbd><br>
+            Collect every coin you can. Touch the portal at the end to win.
+          </div>
+          <div class="game-action-buttons">
+            <button class="btn" id="pauseButton" disabled>Ⅱ PAUSE</button>
+            <button class="btn" id="restartButton">↻ RESTART</button>
+          </div>
+        </div>
+
+        <div class="touch-controls" aria-label="Touch game controls">
+          <div class="touch-group">
+            <button class="touch-btn" data-control="left" aria-label="Move left">←</button>
+            <button class="touch-btn" data-control="right" aria-label="Move right">→</button>
+          </div>
+          <button class="touch-btn" data-control="jump" aria-label="Jump">↑ JUMP</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard">
+      <article class="dash-card">
+        <div class="dash-icon">👾</div>
+        <p class="eyebrow">PLAYER PROFILE</p>
+        <h3>ATHARVA.EXE</h3>
+        <p>Certified chaos merchant. Roommate-class player. Main character energy: dangerously high.</p>
+        <div class="profile-stats">
+          <div class="mini-stat"><small>PLAYER LEVEL</small><strong id="profileLevel">01</strong></div>
+          <div class="mini-stat"><small>TOTAL XP</small><strong id="profileXP">000</strong></div>
+          <div class="mini-stat"><small>CHAOS</small><strong>99%</strong></div>
+          <div class="mini-stat"><small>LOYALTY</small><strong>MAX</strong></div>
+        </div>
+      </article>
+
+      <article class="dash-card">
+        <div class="dash-icon">🗺️</div>
+        <p class="eyebrow">QUEST LOG</p>
+        <h3>Mission checklist</h3>
+        <p>Every legend starts somewhere. These missions are just the beginning.</p>
+        <div class="quest-list">
+          <div class="quest-row">
+            <span class="quest-check" id="questPlay">○</span>
+            <span>Start your adventure<small>Launch Pixel Runner</small></span>
+          </div>
+          <div class="quest-row">
+            <span class="quest-check" id="questCoin">○</span>
+            <span>Coin collector<small>Collect your first coin</small></span>
+          </div>
+          <div class="quest-row">
+            <span class="quest-check" id="questWin">○</span>
+            <span>Portal conqueror<small>Reach the finish portal</small></span>
+          </div>
+          <div class="quest-row">
+            <span class="quest-check" id="questBoss">○</span>
+            <span>Boss energy<small>Inspect the final challenge</small></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dash-card">
+        <div class="dash-icon">🏆</div>
+        <p class="eyebrow">ACHIEVEMENTS</p>
+        <h3>Hall of legends</h3>
+        <p>Every action earns XP. Can you unlock the full collection?</p>
+        <div class="quest-list">
+          <div class="quest-row">
+            <span class="quest-check" id="achStart">🔒</span>
+            <span>Press Start<small>Play your first round</small></span>
+          </div>
+          <div class="quest-row">
+            <span class="quest-check" id="achCoin">🔒</span>
+            <span>Shiny Object Syndrome<small>Collect a coin</small></span>
+          </div>
+          <div class="quest-row">
+            <span class="quest-check" id="achWin">🔒</span>
+            <span>GG EZ<small>Finish the level</small></span>
+          </div>
+          <div class="quest-row">
+            <span class="quest-check" id="achScore">🔒</span>
+            <span>Score Hunter<small>Reach 500 points</small></span>
+          </div>
+        </div>
+        <button class="dash-link" id="viewAchievements">VIEW ACHIEVEMENTS ↗</button>
+      </article>
+    </section>
+
+    <section class="boss-section" id="boss">
+      <div>
+        <p class="eyebrow">FINAL STAGE / CLASSIFIED</p>
+        <h2>The roommate boss battle.</h2>
+        <p>
+          The ultimate challenge is loading. Future levels could feature inside
+          jokes, college memories, custom challenges and an actual birthday
+          surprise. For now, this is your warning: the boss fight will not be fair.
+        </p>
+        <div class="boss-health">
+          <span>BOSS HP</span>
+          <div class="health-bar"><span></span></div>
+          <span>???</span>
+        </div>
+        <button class="btn btn-pink" id="bossButton" style="margin-top:22px">⚔ INSPECT FINAL BOSS</button>
+      </div>
+      <div class="boss-art" aria-hidden="true">☠</div>
+    </section>
+
+    <footer class="footer">
+      <span>THE BIRTHDAY LAB © 2026 / CONCEPT 01</span>
+      <a href="../index.html">← BACK TO CONCEPT ARCHIVE</a>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <strong id="toastTitle">ACHIEVEMENT UNLOCKED!</strong>
+    <span id="toastText">You earned some XP.</span>
+  </div>
+
+  <div class="modal" id="infoModal" hidden>
+    <div class="modal-card">
+      <p class="eyebrow" id="modalEyebrow">PLAYER MANUAL</p>
+      <h2 id="modalTitle">How to play</h2>
+      <div id="modalContent"></div>
+      <button class="btn btn-primary" id="modalClose">GOT IT ✓</button>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      const canvas = $("gameCanvas");
+      const ctx = canvas.getContext("2d");
+
+      const W = canvas.width;
+      const H = canvas.height;
+      const FLOOR = 355;
+      const WORLD_END = 2900;
+
+      let state = "ready";
+      let animationId = 0;
+      let lastTime = 0;
+      let elapsed = 0;
+      let score = 0;
+      let coinsCollected = 0;
+      let lives = 3;
+      let xp = 0;
+      let highestScore = 0;
+      let toastTimer = null;
+      let jumpQueued = false;
+      let bossInspected = false;
+
+      const keys = { left: false, right: false };
+      const touchKeys = { left: false, right: false };
+
+      const player = {
+        x: 65,
+        y: FLOOR - 38,
+        w: 25,
+        h: 32,
+        vx: 0,
+        vy: 0,
+        speed: 3.5,
+        jump: -85,
+        onGround: true,
+        invincible: 0,
+        facing: 1
+      };
+
+      let cameraX = 0;
+      let coins = [];
+      let spikes = [];
+      let particles = [];
+      let platforms = [];
+      let scenery = [];
+      let portal = { x: WORLD_END - 110, y: FLOOR - 78, w: 46, h: 78 };
+
+      const unlocked = new Set();
+
+      function resetWorld() {
+        player.x = 65;
+        player.y = FLOOR - player.h;
+        player.vx = 0;
+        player.vy = 0;
+        player.onGround = true;
+        player.invincible = 0;
+        player.facing = 1;
+
+        cameraX = 0;
+        elapsed = 0;
+        score = 0;
+        coinsCollected = 0;
+        lives = 3;
+        jumpQueued = false;
+        particles = [];
+
+        coins = [
+          { x: 260, y: 275, got: false },
+          { x: 390, y: 245, got: false },
+          { x: 600, y: 285, got: false },
+          { x: 790, y: 240, got: false },
+          { x: 1120, y: 265, got: false },
+          { x: 1420, y: 225, got: false },
+          { x: 1770, y: 265, got: false },
+          { x: 2070, y: 235, got: false }
+        ];
+
+        spikes = [
+          { x: 465, w: 42 },
+          { x: 900, w: 48 },
+          { x: 1240, w: 55 },
+          { x: 1560, w: 42 },
+          { x: 1870, w: 56 },
+          { x: 2240, w: 48 },
+          { x: 2500, w: 60 }
+        ];
+
+        platforms = [
+          { x: 315, y: 302, w: 100, h: 14 },
+          { x: 710, y: 295, w: 115, h: 14 },
+          { x: 1020, y: 300, w: 120, h: 14 },
+          { x: 1350, y: 285, w: 110, h: 14 },
+          { x: 1660, y: 300, w: 115, h: 14 },
+          { x: 1970, y: 285, w: 120, h: 14 },
+          { x: 2340, y: 300, w: 125, h: 14 }
+        ];
+
+        scenery = [];
+        for (let i = 0; i < 90; i++) {
+          scenery.push({
+            x: i * 43 + ((i * 37) % 19),
+            y: 35 + ((i * 71) % 185),
+            size: i % 5 === 0 ? 3 : 2,
+            phase: i % 7
+          });
+        }
+
+        updateHud();
+        render();
+      }
+
+      function formatScore(n) {
+        return String(Math.max(0, Math.floor(n))).padStart(4, "0");
+      }
+
+      function updateHud() {
+        $("scoreValue").textContent = formatScore(score);
+        $("coinValue").textContent = coinsCollected + " / " + coins.length;
+        $("livesValue").textContent = lives > 0 ? "♥ ".repeat(lives).trim() : "0";
+        $("xpValue").textContent = String(xp).padStart(3, "0") + " XP";
+        $("profileXP").textContent = String(xp).padStart(3, "0");
+        $("profileLevel").textContent = String(Math.floor(xp / 150) + 1).padStart(2, "0");
+
+        if (coinsCollected > 0) setQuest("questCoin", true);
+        if (score >= 500) unlock("score", "achScore", "Score Hunter", "500 points. Your high-score era begins.");
+      }
+
+      function setQuest(id, complete) {
+        $(id).textContent = complete ? "✓" : "○";
+        $(id).style.borderColor = complete ? "#83ff9b" : "";
+      }
+
+      function unlock(id, elementId, title, description) {
+        if (unlocked.has(id)) return;
+        unlocked.add(id);
+        $(elementId).textContent = "✓";
+        $(elementId).style.color = "#83ff9b";
+        showToast("ACHIEVEMENT UNLOCKED!", title + " — " + description);
+        addXP(25);
+      }
+
+      function addXP(amount) {
+        xp += amount;
+        updateHud();
+      }
+
+      function showToast(title, message) {
+        $("toastTitle").textContent = title;
+        $("toastText").textContent = message;
+        $("toast").classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => $("toast").classList.remove("show"), 2800);
+      }
+
+      function setOverlay(icon, title, text, buttonLabel, callback) {
+        $("overlayIcon").textContent = icon;
+        $("overlayTitle").textContent = title;
+        $("overlayText").textContent = text;
+        $("overlayStart").textContent = buttonLabel;
+        $("overlayStart").onclick = callback;
+        $("gameOverlay").classList.remove("hidden");
+      }
+
+      function hideOverlay() {
+        $("gameOverlay").classList.add("hidden");
+      }
+
+      function startGame() {
+        cancelAnimationFrame(animationId);
+        resetWorld();
+        state = "playing";
+        $("pauseButton").disabled = false;
+        $("pauseButton").textContent = "Ⅱ PAUSE";
+        $("questPlay").textContent = "✓";
+        $("achStart").textContent = "✓";
+        $("achStart").style.color = "#83ff9b";
+        addXP(10);
+        hideOverlay();
+        lastTime = performance.now();
+        animationId = requestAnimationFrame(loop);
+        $("arcade").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function pauseGame() {
+        if (state === "playing") {
+          state = "paused";
+          cancelAnimationFrame(animationId);
+          $("pauseButton").textContent = "▶ RESUME";
+          setOverlay("Ⅱ", "GAME PAUSED", "Take a breath, legend. Your coins aren't going anywhere.", "▶ RESUME", resumeGame);
+        } else if (state === "paused") {
+          resumeGame();
+        }
+      }
+
+      function resumeGame() {
+        if (state !== "paused") return;
+        state = "playing";
+        hideOverlay();
+        $("pauseButton").textContent = "Ⅱ PAUSE";
+        lastTime = performance.now();
+        animationId = requestAnimationFrame(loop);
+      }
+
+      function endGame(won) {
+        state = won ? "won" : "over";
+        cancelAnimationFrame(animationId);
+        $("pauseButton").disabled = true;
+
+        if (won) {
+          score += lives * 100 + coinsCollected * 50;
+          highestScore = Math.max(highestScore, score);
+          addXP(100);
+          setQuest("questWin", true);
+          unlock("win", "achWin", "GG EZ", "Level complete. The legend is real.");
+          updateHud();
+
+          setOverlay(
+            "🏆",
+            "LEVEL COMPLETE!",
+            "PORTAL CONQUERED! You scored " + score + " points and collected " + coinsCollected + " coins. The next world is still loading...",
+            "↻ PLAY AGAIN",
+            startGame
+          );
+        } else {
+          setOverlay(
+            "💀",
+            "GAME OVER",
+            "The valley won this round. Score: " + score + ". Every legend needs a comeback arc.",
+            "↻ TRY AGAIN",
+            startGame
+          );
+        }
+      }
+
+      function loseLife() {
+        if (player.invincible > 0 || state !== "playing") return;
+        lives--;
+        player.invincible = 1.5;
+        player.vy = -5;
+        player.vx = -player.facing * 2;
+        spawnBurst(player.x + player.w / 2, player.y + player.h / 2, "#ff4d9d", 12);
+        showToast("OUCH!", lives > 0 ? "Careful! " + lives + " life/lives left." : "No lives left. Game over incoming.");
+        updateHud();
+
+        if (lives <= 0) endGame(false);
+      }
+
+      function spawnBurst(x, y, color, amount) {
+        for (let i = 0; i < amount; i++) {
+          particles.push({
+            x, y,
+            vx: (Math.random() - .5) * 5,
+            vy: (Math.random() - .5) * 5,
+            life: .35 + Math.random() * .45,
+            maxLife: .8,
+            color,
+            size: 2 + Math.random() * 4
+          });
+        }
+      }
+
+      function rectsOverlap(a, b) {
+        return a.x < b.x + b.w &&
+          a.x + a.w > b.x &&
+          a.y < b.y + b.h &&
+          a.y + a.h > b.y;
+      }
+
+      function update(dt) {
+        elapsed += dt;
+
+        const movingLeft = keys.left || touchKeys.left;
+        const movingRight = keys.right || touchKeys.right;
+
+        if (movingLeft) {
+          player.vx = -player.speed;
+          player.facing = -1;
+        } else if (movingRight) {
+          player.vx = player.speed;
+          player.facing = 1;
+        } else {
+          player.vx *= .78;
+          if (Math.abs(player.vx) < .15) player.vx = 0;
+        }
+
+        if (jumpQueued && player.onGround) {
+          player.vy = player.jump;
+          player.onGround = false;
+          spawnBurst(player.x + player.w / 2, player.y + player.h, "#45f6e8", 5);
+        }
+        jumpQueued = false;
+
+        player.x += player.vx;
+        player.x = Math.max(0, Math.min(WORLD_END - player.w, player.x));
+
+        player.vy += 38 * dt;
+        player.y += player.vy * dt;
+        player.onGround = false;
+
+        const playerRect = {
+          x: player.x,
+          y: player.y,
+          w: player.w,
+          h: player.h
+        };
+
+        if (player.y + player.h >= FLOOR) {
+          player.y = FLOOR - player.h;
+          player.vy = 0;
+          player.onGround = true;
+        }
+
+        for (const p of platforms) {
+          const previousBottom = player.y + player.h - player.vy * dt;
+          if (
+            player.vy >= 0 &&
+            player.x + player.w > p.x &&
+            player.x < p.x + p.w &&
+            previousBottom <= p.y + 3 &&
+            player.y + player.h >= p.y &&
+            player.y < p.y
+          ) {
+            player.y = p.y - player.h;
+            player.vy = 0;
+            player.onGround = true;
+          }
+        }
+
+        if (player.invincible > 0) player.invincible -= dt;
+
+        for (const coin of coins) {
+          if (coin.got) continue;
+          const coinRect = { x: coin.x - 9, y: coin.y - 9, w: 18, h: 18 };
+          if (rectsOverlap(playerRect, coinRect)) {
+            coin.got = true;
+            coinsCollected++;
+            score += 100;
+            addXP(15);
+            spawnBurst(coin.x, coin.y, "#ffe66d", 12);
+            showToast("COIN COLLECTED! +100", "Shiny object acquired. Your XP is looking healthier.");
+            updateHud();
+            unlock("coin", "achCoin", "Shiny Object Syndrome", "Your first coin. A collector is born.");
+          }
+        }
+
+        for (const spike of spikes) {
+          const spikeRect = { x: spike.x, y: FLOOR - 21, w: spike.w, h: 21 };
+          if (rectsOverlap(playerRect, spikeRect)) {
+            loseLife();
+            break;
+          }
+        }
+
+        if (player.invincible > 0 && player.x < 0) player.x = 0;
+
+        if (player.x > portal.x + portal.w) {
+          endGame(true);
+          return;
+        }
+
+        cameraX = Math.max(0, Math.min(WORLD_END - W, player.x - W * .34));
+
+        for (const p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life -= dt;
+          p.vx *= .98;
+          p.vy += 5 * dt;
+        }
+        particles = particles.filter(p => p.life > 0);
+
+        score += dt * 2;
+        updateHud();
+      }
+
+      function drawPixelRect(x, y, w, h, color) {
+        ctx.fillStyle = color;
+        ctx.fillRect(Math.round(x), Math.round(y), w, h);
+      }
+
+      function drawBackground() {
+        const gradient = ctx.createLinearGradient(0, 0, 0, H);
+        gradient.addColorStop(0, "#101832");
+        gradient.addColorStop(.6, "#202453");
+        gradient.addColorStop(1, "#131b34");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, W, H);
+
+        // Starfield parallax.
+        for (const star of scenery) {
+          const sx = ((star.x - cameraX * .18) % W + W) % W;
+          const sy = star.y;
+          ctx.globalAlpha = .45 + Math.sin(elapsed * 2 + star.phase) * .25;
+          drawPixelRect(sx, sy, star.size, star.size, "#d9e5ff");
+        }
+        ctx.globalAlpha = 1;
+
+        // Distant pixel mountains.
+        for (let i = -1; i < 8; i++) {
+          const mx = i * 180 - (cameraX * .3 % 180);
+          ctx.fillStyle = "#292d66";
+          ctx.beginPath();
+          ctx.moveTo(mx, FLOOR);
+          ctx.lineTo(mx + 90, 105 + (i % 3) * 18);
+          ctx.lineTo(mx + 180, FLOOR);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        for (let i = -1; i < 12; i++) {
+          const bx = i * 100 - (cameraX * .55 % 100);
+          drawPixelRect(bx, FLOOR - 60, 45, 60, "#191f48");
+          drawPixelRect(bx + 8, FLOOR - 78, 29, 18, "#191f48");
+          drawPixelRect(bx + 13, FLOOR - 52, 6, 9, "#45f6e8");
+          drawPixelRect(bx + 26, FLOOR - 32, 6, 9, "#9b7bff");
+        }
+
+        // Ground.
+        drawPixelRect(0, FLOOR, W, H - FLOOR, "#14223a");
+        drawPixelRect(0, FLOOR, W, 8, "#45f6e8");
+        drawPixelRect(0, FLOOR + 8, W, 3, "#267d8b");
+
+        for (let x = -((cameraX % 32)); x < W; x += 32) {
+          drawPixelRect(x, FLOOR + 20, 15, 4, "#1e3150");
+          drawPixelRect(x + 15, FLOOR + 37, 13, 4, "#1e3150");
+        }
+      }
+
+      function drawCoins() {
+        for (const coin of coins) {
+          if (coin.got) continue;
+          const x = coin.x - cameraX;
+          const y = coin.y + Math.sin(elapsed * 5 + coin.x) * 4;
+
+          ctx.shadowColor = "#ffe66d";
+          ctx.shadowBlur = 15;
+          drawPixelRect(x - 7, y - 10, 14, 20, "#f4b942");
+          drawPixelRect(x - 4, y - 7, 8, 14, "#ffe66d");
+          drawPixelRect(x - 2, y - 4, 4, 8, "#fff4a5");
+          ctx.shadowBlur = 0;
+        }
+      }
+
+      function drawPlatforms() {
+        for (const p of platforms) {
+          const x = p.x - cameraX;
+          if (x < -p.w || x > W) continue;
+          drawPixelRect(x, p.y, p.w, p.h, "#4d4a9b");
+          drawPixelRect(x, p.y, p.w, 4, "#9b7bff");
+          for (let j = 8; j < p.w; j += 20) {
+            drawPixelRect(x + j, p.y + 7, 7, 3, "#6d65be");
+          }
+        }
+      }
+
+      function drawSpikes() {
+        for (const spike of spikes) {
+          const x = spike.x - cameraX;
+          if (x < -spike.w || x > W) continue;
+          const count = Math.max(1, Math.floor(spike.w / 14));
+          for (let i = 0; i < count; i++) {
+            ctx.fillStyle = "#ff4d9d";
+            ctx.beginPath();
+            ctx.moveTo(x + i * 14, FLOOR);
+            ctx.lineTo(x + i * 14 + 7, FLOOR - 22);
+            ctx.lineTo(x + i * 14 + 14, FLOOR);
+            ctx.fill();
+            drawPixelRect(x + i * 14 + 5, FLOOR - 7, 4, 4, "#ffb1d4");
+          }
+        }
+      }
+
+      function drawPortal() {
+        const x = portal.x - cameraX;
+        if (x < -100 || x > W + 100) return;
+
+        ctx.save();
+        ctx.shadowColor = "#45f6e8";
+        ctx.shadowBlur = 25 + Math.sin(elapsed * 4) * 8;
+        ctx.strokeStyle = "#45f6e8";
+        ctx.lineWidth = 5;
+        ctx.strokeRect(x, portal.y, portal.w, portal.h);
+        ctx.fillStyle = "rgba(69,246,232,.15)";
+        ctx.fillRect(x + 5, portal.y + 5, portal.w - 10, portal.h - 10);
+        ctx.restore();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "10px monospace";
+        ctx.textAlign = "center";
+        ctx.fillText("EXIT", x + portal.w / 2, portal.y - 12);
+        ctx.textAlign = "left";
+      }
+
+      function drawPlayer() {
+        const x = player.x - cameraX;
+        const y = player.y;
+
+        if (player.invincible > 0 && Math.floor(elapsed * 12) % 2 === 0) return;
+
+        // Shadow.
+        ctx.globalAlpha = .2;
+        drawPixelRect(x - 3, FLOOR - 3, player.w + 6, 4, "#000000");
+        ctx.globalAlpha = 1;
+
+        // Pixel character.
+        drawPixelRect(x + 3, y, 19, 7, "#ff78b5");
+        drawPixelRect(x, y + 6, 25, 18, "#ff4d9d");
+        drawPixelRect(x + 4, y + 24, 7, 8, "#ffe66d");
+        drawPixelRect(x + 16, y + 24, 7, 8, "#ffe66d");
+
+        // Face.
+        const eyeX = player.facing === 1 ? x + 15 : x + 5;
+        drawPixelRect(eyeX, y + 11, 4, 4, "#ffffff");
+        drawPixelRect(eyeX + (player.facing === 1 ? 1 : 0), y + 12, 2, 2, "#17203e");
+
+        // Backpack.
+        drawPixelRect(player.facing === 1 ? x - 4 : x + 20, y + 11, 6, 11, "#9b7bff");
+
+        if (!player.onGround) {
+          drawPixelRect(x + 4, y + 33, 5, 3, "#45f6e8");
+          drawPixelRect(x + 17, y + 33, 5, 3, "#45f6e8");
+        }
+      }
+
+      function drawParticles() {
+        for (const p of particles) {
+          ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
+          drawPixelRect(p.x - cameraX, p.y, p.size, p.size, p.color);
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      function drawProgress() {
+        const progress = Math.max(0, Math.min(1, player.x / portal.x));
+        drawPixelRect(18, 18, 180, 6, "#293654");
+        drawPixelRect(18, 18, 180 * progress, 6, "#45f6e8");
+        ctx.fillStyle = "#dce6ff";
+        ctx.font = "10px monospace";
+        ctx.fillText("LEVEL PROGRESS " + Math.floor(progress * 100) + "%", 18, 39);
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, W, H);
+        drawBackground();
+        drawPlatforms();
+        drawSpikes();
+        drawCoins();
+        drawPortal();
+        drawPlayer();
+        drawParticles();
+        drawProgress();
+      }
+
+      function loop(timestamp) {
+        if (state !== "playing") return;
+
+        const dt = Math.min((timestamp - lastTime) / 1000, .032);
+        lastTime = timestamp;
+
+        update(dt);
+        render();
+
+        if (state === "playing") {
+          animationId = requestAnimationFrame(loop);
+        }
+      }
+
+      function openModal(eyebrow, title, html) {
+        $("modalEyebrow").textContent = eyebrow;
+        $("modalTitle").textContent = title;
+        $("modalContent").innerHTML = html;
+        $("infoModal").hidden = false;
+      }
+
+      function showInstructions() {
+        openModal(
+          "PLAYER MANUAL / V1.0",
+          "How to play",
+          `<p><strong style="color:#45f6e8">OBJECTIVE</strong><br>Reach the glowing EXIT portal on the right side of the level.</p>
+           <p><strong style="color:#ffe66d">COLLECT</strong><br>Every coin adds 100 points and 15 XP. There are 8 coins in the valley.</p>
+           <p><strong style="color:#ff4d9d">SURVIVE</strong><br>Avoid the pink spikes. You start with 3 lives. Losing all 3 ends the run.</p>
+           <p><strong style="color:#9b7bff">CONTROLS</strong><br>A / D or arrow keys to move. Space, W or Up Arrow to jump. On mobile, use the touch buttons under the game.</p>
+           <p>Tip: build up some speed, time your jumps and don't forget the coins above platforms.</p>`
+        );
+      }
+
+      function showAchievements() {
+        const list = [
+          ["🎮", "Press Start", unlocked.has("start") || state !== "ready"],
+          ["🪙", "Shiny Object Syndrome", unlocked.has("coin")],
+          ["🏆", "GG EZ", unlocked.has("win")],
+          ["💯", "Score Hunter", unlocked.has("score")]
+        ];
+
+        openModal(
+          "PLAYER RECORD / ACHIEVEMENTS",
+          "Hall of legends",
+          list.map(item =>
+            `<div class="achievement">
+              <div class="achievement-icon">${item[0]}</div>
+              <div>
+                <strong>${item[1]}</strong>
+                <small>${item[2] ? "UNLOCKED · NICE WORK, LEGEND." : "LOCKED · KEEP PLAYING TO UNLOCK."}</small>
+              </div>
+            </div>`
+          ).join("")
+        );
+      }
+
+      function inspectBoss() {
+        bossInspected = true;
+        setQuest("questBoss", true);
+        addXP(10);
+        showToast("BOSS INTEL ACQUIRED", "Roommate boss scanned. Difficulty: emotionally unfair.");
+        openModal(
+          "FINAL STAGE / CLASSIFIED",
+          "The Roommate Boss",
+          `<div class="achievement">
+             <div class="achievement-icon">☠</div>
+             <div><strong>THE ROOMMATE</strong><small>THREAT LEVEL: ABSOLUTELY UNNECESSARY</small></div>
+           </div>
+           <p><strong style="color:#ff4d9d">KNOWN ABILITIES</strong></p>
+           <p>• Steals the last snack without warning.<br>• Says “bas 5 minute” and disappears for an hour.<br>• Has a suspiciously high chaos stat.<br>• Can turn a normal day into a side quest.</p>
+           <p>Weakness: friendship, food and a well-timed birthday surprise.</p>
+           <p style="color:#45f6e8">MORE BOSS DETAILS UNLOCK IN THE FULL BIRTHDAY BUILD.</p>`
+        );
+      }
+
+      $("heroStart").addEventListener("click", startGame);
+      $("overlayStart").addEventListener("click", startGame);
+      $("howToPlay").addEventListener("click", showInstructions);
+      $("pauseButton").addEventListener("click", pauseGame);
+      $("restartButton").addEventListener("click", () => {
+        if (state === "ready") {
+          startGame();
+        } else {
+          startGame();
+        }
+      });
+
+      $("viewAchievements").addEventListener("click", showAchievements);
+      $("bossButton").addEventListener("click", inspectBoss);
+      $("modalClose").addEventListener("click", () => $("infoModal").hidden = true);
+
+      $("infoModal").addEventListener("click", (event) => {
+        if (event.target === $("infoModal")) $("infoModal").hidden = true;
+      });
+
+      window.addEventListener("keydown", (event) => {
+        const key = event.key.toLowerCase();
+
+        if (["arrowleft", "arrowright", "arrowup", " "].includes(key)) {
+          event.preventDefault();
+        }
+
+        if (key === "arrowleft" || key === "a") keys.left = true;
+        if (key === "arrowright" || key === "d") keys.right = true;
+
+        if (
+          key === " " || key === "arrowup" || key === "w"
+        ) {
+          if (!event.repeat) jumpQueued = true;
+        }
+
+        if (key === "escape") {
+          if (!$("infoModal").hidden) {
+            $("infoModal").hidden = true;
+          } else if (state === "playing" || state === "paused") {
+            pauseGame();
+          }
+        }
+      });
+
+      window.addEventListener("keyup", (event) => {
+        const key = event.key.toLowerCase();
+        if (key === "arrowleft" || key === "a") keys.left = false;
+        if (key === "arrowright" || key === "d") keys.right = false;
+      });
+
+      window.addEventListener("blur", () => {
+        keys.left = false;
+        keys.right = false;
+        touchKeys.left = false;
+        touchKeys.right = false;
+        if (state === "playing") pauseGame();
+      });
+
+      document.querySelectorAll("[data-control]").forEach(button => {
+        const control = button.dataset.control;
+
+        const startControl = (event) => {
+          event.preventDefault();
+          if (control === "jump") {
+            jumpQueued = true;
+          } else {
+            touchKeys[control] = true;
+          }
+        };
+
+        const stopControl = (event) => {
+          event.preventDefault();
+          if (control !== "jump") touchKeys[control] = false;
+        };
+
+        button.addEventListener("pointerdown", startControl);
+        button.addEventListener("pointerup", stopControl);
+        button.addEventListener("pointercancel", stopControl);
+        button.addEventListener("pointerleave", stopControl);
+        button.addEventListener("contextmenu", event => event.preventDefault());
+      });
+
+      // Initial attract screen: animate the scenery before the first game.
+      resetWorld();
+      render();
+
+      // Cosmetic idle animation on the canvas before starting.
+      function idleLoop(timestamp) {
+        if (state !== "ready") return;
+        elapsed = timestamp / 1000;
+        render();
+        animationId = requestAnimationFrame(idleLoop);
+      }
+      animationId = requestAnimationFrame(idleLoop);
+    })();
+  </script>
 </body>
 </html>
