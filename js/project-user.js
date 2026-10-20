@@ -71,19 +71,19 @@
     memories: {
       label: "RESTRICTED FILE / 004",
       title: "MEMORY VAULT.",
-      text: "Clearance required. In the finished birthday build, this file can reveal actual photos, screenshots, a memory timeline or a private collection of your favourite moments.",
+      text: "Clearance required. In the finished build, this file can reveal photos, screenshots, a memory timeline or a private collection of your favourite moments.",
       status: "STATUS: PREVIEW ACCESS ONLY"
     },
-    birthday: {
+    operation: {
       label: "RESTRICTED FILE / 005",
-      title: "OPERATION 10-DEC.",
-      text: "A birthday operation has been scheduled for December 10, 2026. The final version could reveal a personalised birthday message, the physical gift clue or a surprise page after a puzzle is solved.",
+      title: "THE HIDDEN OPERATION.",
+      text: "A new operation is being prepared. The final version could reveal a personal message, a hidden clue or a surprise page after a puzzle is solved.",
       status: "STATUS: OPERATION IN PREPARATION"
     },
     classified: {
       label: "RESTRICTED FILE / 006",
       title: "REDACTED INTEL.",
-      text: "Some information is being withheld until the final birthday experience is ready. Replace this placeholder with an inside joke, a secret note or a final reveal that only User will understand.",
+      text: "Some information is being withheld until the experience is ready. Replace this placeholder with an inside joke, a secret note or a final reveal that only User will understand.",
       status: "STATUS: CLASSIFIED BY THE INVESTIGATOR"
     }
   };
@@ -113,7 +113,7 @@
     }
 
     // Demo only: there is no secret authentication or real security here.
-    if (["user", "birthday", "10 december", "10-dec", "roommate"].includes(code)) {
+    if (["user", "creator", "roommate"].includes(code)) {
       result.style.color = "var(--green)";
       result.textContent = "> ACCESS GRANTED. DEMO TERMINAL UNLOCKED ✓";
       toast("DEMO ACCESS GRANTED // NICE TRY, INVESTIGATOR");

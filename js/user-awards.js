@@ -208,7 +208,7 @@
           "Award: " + dialog.dataset.title + "\n" +
           "Winner: " + dialog.dataset.winner + "\n" +
           dialog.dataset.reason + "\n\n" +
-          "Officially recognised by The Birthday Lab.";
+          "Officially recognised by THE CREATOR LAB.";
 
         try {
           if (navigator.clipboard && window.isSecureContext) {
@@ -343,7 +343,7 @@
         playTone(660, 0.2);
         setTimeout(() => playTone(880, 0.2), 170);
         setTimeout(() => playTone(1100, 0.35), 340);
-        showToast("Happy Birthday, User! Certified legend status: PERMANENT. ✦");
+        showToast("Quest complete, User! Certified legend status: PERMANENT. ✦");
       });
 
       document.getElementById("soundToggle").addEventListener("click", () => {

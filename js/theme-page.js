@@ -1,11 +1,11 @@
 const demos = {
   gamer: {
     title: "LEVEL UP! +100 XP",
-    text: "Achievement unlocked: You opened the preview. In the final version, we can build real mini-games, collectibles and a birthday boss battle."
+    text: "Achievement unlocked: You opened the preview. In the final version, we can build real mini-games, collectibles and a final boss battle."
   },
   os: {
     title: "SYSTEM CHECK: LEGENDARY",
-    text: "All systems operational. Roommate.exe is using 98% of available chaos. Secret birthday files are still being compiled."
+    text: "All systems operational. Roommate.exe is using 98% of available chaos. Secret files are still being compiled."
   },
   classified: {
     title: "CASE FILE UPDATED",
@@ -17,11 +17,11 @@ const demos = {
   },
   awards: {
     title: "AND THE AWARD GOES TO…",
-    text: "The award for Most Likely to Be Roasted on His Birthday goes to… USER! Please hold your acceptance speech."
+    text: "The award for Most Likely to Be Roasted goes to… USER! Please hold your acceptance speech."
   },
   quest: {
     title: "SIDE QUEST UNLOCKED",
-    text: "Quest: Tell Ayush which theme you like. Reward: one extremely personalised birthday website. Difficulty: easy, hopefully."
+    text: "Quest: Tell Ayush which theme you like. Reward: one extremely personalised interactive web experience. Difficulty: easy, hopefully."
   }
 };
 const page = document.querySelector("[data-page]");
